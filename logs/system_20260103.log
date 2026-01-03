@@ -1,0 +1,484 @@
+2026-01-03 17:23:56,961 - __main__ - INFO - ============================================================
+2026-01-03 17:23:56,962 - __main__ - INFO - A股板块涨停预测系统启动
+2026-01-03 17:23:56,962 - __main__ - INFO - 运行模式: full
+2026-01-03 17:23:56,962 - __main__ - INFO - ============================================================
+2026-01-03 17:23:56,983 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:23:56,989 - __main__ - INFO - 运行完整预测流程...
+2026-01-03 17:23:56,990 - __main__ - INFO - ==================================================
+2026-01-03 17:23:56,990 - __main__ - INFO - 开始获取每日数据...
+2026-01-03 17:23:56,990 - data.data_fetcher - INFO - 获取概念板块资金流向...
+2026-01-03 17:23:59,664 - data.data_fetcher - INFO - 成功获取 386 个概念板块资金流向数据
+2026-01-03 17:23:59,664 - data.data_fetcher - INFO - 获取行业板块资金流向...
+2026-01-03 17:24:00,303 - data.data_fetcher - INFO - 成功获取 90 个行业板块资金流向数据
+2026-01-03 17:24:00,303 - data.data_fetcher - INFO - 获取 20260103 涨停池数据...
+2026-01-03 17:24:05,110 - data.data_fetcher - INFO - 成功获取 57 只涨停股票数据
+2026-01-03 17:24:05,112 - data.data_fetcher - INFO - 获取北向资金板块排行...
+2026-01-03 17:24:07,196 - data.data_fetcher - INFO - 成功获取 86 个北向资金板块数据
+2026-01-03 17:24:07,196 - data.data_fetcher - INFO - 获取 20260103 龙虎榜数据...
+2026-01-03 17:24:07,197 - data.data_fetcher - WARNING - 数据获取失败 (尝试 1/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-03 17:24:09,198 - data.data_fetcher - WARNING - 数据获取失败 (尝试 2/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-03 17:24:11,199 - data.data_fetcher - WARNING - 数据获取失败 (尝试 3/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-03 17:24:11,231 - data.data_fetcher - INFO - 保存 concept_money_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260103\concept_money_flow.csv
+2026-01-03 17:24:11,231 - data.data_fetcher - INFO - 保存 industry_money_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260103\industry_money_flow.csv
+2026-01-03 17:24:11,237 - data.data_fetcher - INFO - 保存 limit_up_pool 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260103\limit_up_pool.csv
+2026-01-03 17:24:11,241 - data.data_fetcher - INFO - 保存 northbound_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260103\northbound_flow.csv
+2026-01-03 17:24:11,284 - data.data_processor - INFO - 创建新板块映射: 小红书概念 -> BK0001
+2026-01-03 17:24:11,326 - data.data_processor - INFO - 创建新板块映射: 快手概念 -> BK0002
+2026-01-03 17:24:11,331 - data.data_processor - INFO - 创建新板块映射: 中船系 -> BK0003
+2026-01-03 17:24:11,340 - data.data_processor - INFO - 创建新板块映射: 中韩自贸区 -> BK0004
+2026-01-03 17:24:11,348 - data.data_processor - INFO - 创建新板块映射: 军工信息化 -> BK0005
+2026-01-03 17:24:11,357 - data.data_processor - INFO - 创建新板块映射: 智谱AI -> BK0006
+2026-01-03 17:24:11,375 - data.data_processor - INFO - 创建新板块映射: AI语料 -> BK0007
+2026-01-03 17:24:11,444 - data.data_processor - INFO - 创建新板块映射: 国产航母 -> BK0008
+2026-01-03 17:24:11,482 - data.data_processor - INFO - 创建新板块映射: Sora概念(文生视频) -> BK0009
+2026-01-03 17:24:11,489 - data.data_processor - INFO - 创建新板块映射: 卫星导航 -> BK0010
+2026-01-03 17:24:11,496 - data.data_processor - INFO - 创建新板块映射: 多模态AI -> BK0011
+2026-01-03 17:24:11,503 - data.data_processor - INFO - 创建新板块映射: 移动支付 -> BK0012
+2026-01-03 17:24:11,512 - data.data_processor - INFO - 创建新板块映射: 短剧游戏 -> BK0013
+2026-01-03 17:24:11,518 - data.data_processor - INFO - 创建新板块映射: AIGC概念 -> BK0014
+2026-01-03 17:24:11,526 - data.data_processor - INFO - 创建新板块映射: Web3.0 -> BK0015
+2026-01-03 17:24:11,541 - data.data_processor - INFO - 创建新板块映射: ChatGPT概念 -> BK0016
+2026-01-03 17:24:11,580 - data.data_processor - INFO - 创建新板块映射: 财税数字化 -> BK0017
+2026-01-03 17:24:11,633 - data.data_processor - INFO - 创建新板块映射: ERP概念 -> BK0018
+2026-01-03 17:24:11,652 - data.data_processor - INFO - 创建新板块映射: 商业航天 -> BK0019
+2026-01-03 17:24:11,656 - data.data_processor - INFO - 创建新板块映射: AI智能体 -> BK0020
+2026-01-03 17:24:11,665 - data.data_processor - INFO - 创建新板块映射: 电子身份证 -> BK0021
+2026-01-03 17:24:11,670 - data.data_processor - INFO - 创建新板块映射: 太赫兹 -> BK0022
+2026-01-03 17:24:11,676 - data.data_processor - INFO - 创建新板块映射: 华为欧拉 -> BK0023
+2026-01-03 17:24:11,681 - data.data_processor - INFO - 创建新板块映射: 租售同权 -> BK0024
+2026-01-03 17:24:11,688 - data.data_processor - INFO - 创建新板块映射: 虚拟数字人 -> BK0025
+2026-01-03 17:24:11,694 - data.data_processor - INFO - 创建新板块映射: 航空发动机 -> BK0026
+2026-01-03 17:24:11,701 - data.data_processor - INFO - 创建新板块映射: NFT概念 -> BK0027
+2026-01-03 17:24:11,710 - data.data_processor - INFO - 创建新板块映射: 军民融合 -> BK0028
+2026-01-03 17:24:11,719 - data.data_processor - INFO - 创建新板块映射: 大飞机 -> BK0029
+2026-01-03 17:24:11,731 - data.data_processor - INFO - 创建新板块映射: 时空大数据 -> BK0030
+2026-01-03 17:24:11,752 - data.data_processor - INFO - 创建新板块映射: 智慧政务 -> BK0031
+2026-01-03 17:24:11,779 - data.data_processor - INFO - 创建新板块映射: 同花顺新质50 -> BK0032
+2026-01-03 17:24:11,786 - data.data_processor - INFO - 创建新板块映射: 云办公 -> BK0033
+2026-01-03 17:24:11,793 - data.data_processor - INFO - 创建新板块映射: 跨境支付(CIPS) -> BK0034
+2026-01-03 17:24:11,802 - data.data_processor - INFO - 创建新板块映射: 人脸识别 -> BK0035
+2026-01-03 17:24:11,810 - data.data_processor - INFO - 创建新板块映射: 华为盘古 -> BK0036
+2026-01-03 17:24:11,823 - data.data_processor - INFO - 创建新板块映射: 量子科技 -> BK0037
+2026-01-03 17:24:11,840 - data.data_processor - INFO - 创建新板块映射: 在线教育 -> BK0038
+2026-01-03 17:24:11,878 - data.data_processor - INFO - 创建新板块映射: 6G概念 -> BK0039
+2026-01-03 17:24:11,940 - data.data_processor - INFO - 创建新板块映射: 数据要素 -> BK0040
+2026-01-03 17:24:11,973 - data.data_processor - INFO - 创建新板块映射: 数据安全 -> BK0041
+2026-01-03 17:24:11,981 - data.data_processor - INFO - 创建新板块映射: 华为昇腾 -> BK0042
+2026-01-03 17:24:11,985 - data.data_processor - INFO - 创建新板块映射: MLOps概念 -> BK0043
+2026-01-03 17:24:11,993 - data.data_processor - INFO - 创建新板块映射: 百度概念 -> BK0044
+2026-01-03 17:24:12,002 - data.data_processor - INFO - 创建新板块映射: 网约车 -> BK0045
+2026-01-03 17:24:12,009 - data.data_processor - INFO - 创建新板块映射: 云游戏 -> BK0046
+2026-01-03 17:24:12,018 - data.data_processor - INFO - 创建新板块映射: 网络安全 -> BK0047
+2026-01-03 17:24:12,042 - data.data_processor - INFO - 创建新板块映射: 云计算 -> BK0048
+2026-01-03 17:24:12,105 - data.data_processor - INFO - 创建新板块映射: 空间计算 -> BK0049
+2026-01-03 17:24:12,135 - data.data_processor - INFO - 创建新板块映射: 文化传媒概念 -> BK0050
+2026-01-03 17:24:12,143 - data.data_processor - INFO - 创建新板块映射: 抖音概念(字节概念) -> BK0051
+2026-01-03 17:24:12,148 - data.data_processor - INFO - 创建新板块映射: 数据确权 -> BK0052
+2026-01-03 17:24:12,154 - data.data_processor - INFO - 创建新板块映射: 上海国企改革 -> BK0053
+2026-01-03 17:24:12,160 - data.data_processor - INFO - 创建新板块映射: 元宇宙 -> BK0054
+2026-01-03 17:24:12,164 - data.data_processor - INFO - 创建新板块映射: 成飞概念 -> BK0055
+2026-01-03 17:24:12,173 - data.data_processor - INFO - 创建新板块映射: PM2.5 -> BK0056
+2026-01-03 17:24:12,177 - data.data_processor - INFO - 创建新板块映射: 信创 -> BK0057
+2026-01-03 17:24:12,186 - data.data_processor - INFO - 创建新板块映射: 职业教育 -> BK0058
+2026-01-03 17:24:12,193 - data.data_processor - INFO - 创建新板块映射: 车联网(车路协同) -> BK0059
+2026-01-03 17:24:12,210 - data.data_processor - INFO - 创建新板块映射: 安防 -> BK0060
+2026-01-03 17:24:12,273 - data.data_processor - INFO - 创建新板块映射: 超导概念 -> BK0061
+2026-01-03 17:24:12,321 - data.data_processor - INFO - 创建新板块映射: 鸿蒙概念 -> BK0062
+2026-01-03 17:24:12,327 - data.data_processor - INFO - 创建新板块映射: 数字货币 -> BK0063
+2026-01-03 17:24:12,335 - data.data_processor - INFO - 创建新板块映射: 区块链 -> BK0064
+2026-01-03 17:24:12,339 - data.data_processor - INFO - 创建新板块映射: 低空经济 -> BK0065
+2026-01-03 17:24:12,347 - data.data_processor - INFO - 创建新板块映射: 军工 -> BK0066
+2026-01-03 17:24:12,352 - data.data_processor - INFO - 创建新板块映射: 华为鲲鹏 -> BK0067
+2026-01-03 17:24:12,361 - data.data_processor - INFO - 创建新板块映射: 数字水印 -> BK0068
+2026-01-03 17:24:12,369 - data.data_processor - INFO - 创建新板块映射: 核污染防治 -> BK0069
+2026-01-03 17:24:12,379 - data.data_processor - INFO - 创建新板块映射: 腾讯概念 -> BK0070
+2026-01-03 17:24:12,386 - data.data_processor - INFO - 创建新板块映射: DeepSeek概念 -> BK0071
+2026-01-03 17:24:12,398 - data.data_processor - INFO - 创建新板块映射: 知识产权保护 -> BK0072
+2026-01-03 17:24:12,416 - data.data_processor - INFO - 创建新板块映射: 网红经济 -> BK0073
+2026-01-03 17:24:12,448 - data.data_processor - INFO - 创建新板块映射: 拼多多概念 -> BK0074
+2026-01-03 17:24:12,456 - data.data_processor - INFO - 创建新板块映射: 无人机 -> BK0075
+2026-01-03 17:24:12,464 - data.data_processor - INFO - 创建新板块映射: 国产操作系统 -> BK0076
+2026-01-03 17:24:12,469 - data.data_processor - INFO - 创建新板块映射: 共享单车 -> BK0077
+2026-01-03 17:24:12,477 - data.data_processor - INFO - 创建新板块映射: 虚拟现实 -> BK0078
+2026-01-03 17:24:12,482 - data.data_processor - INFO - 创建新板块映射: 蚂蚁集团概念 -> BK0079
+2026-01-03 17:24:12,485 - data.data_processor - INFO - 创建新板块映射: 智慧城市 -> BK0080
+2026-01-03 17:24:12,494 - data.data_processor - INFO - 创建新板块映射: MicroLED概念 -> BK0081
+2026-01-03 17:24:12,502 - data.data_processor - INFO - 创建新板块映射: 阿里巴巴概念 -> BK0082
+2026-01-03 17:24:12,511 - data.data_processor - INFO - 创建新板块映射: 数字经济 -> BK0083
+2026-01-03 17:24:12,515 - data.data_processor - INFO - 创建新板块映射: DRG/DIP -> BK0084
+2026-01-03 17:24:12,527 - data.data_processor - INFO - 创建新板块映射: 人工智能 -> BK0085
+2026-01-03 17:24:12,531 - data.data_processor - INFO - 创建新板块映射: MR(混合现实) -> BK0086
+2026-01-03 17:24:12,544 - data.data_processor - INFO - 创建新板块映射: 电子竞技 -> BK0087
+2026-01-03 17:24:12,574 - data.data_processor - INFO - 创建新板块映射: 京津冀一体化 -> BK0088
+2026-01-03 17:24:12,634 - data.data_processor - INFO - 创建新板块映射: 汽车拆解概念 -> BK0089
+2026-01-03 17:24:12,689 - data.data_processor - INFO - 创建新板块映射: 数字乡村 -> BK0090
+2026-01-03 17:24:12,740 - data.data_processor - INFO - 创建新板块映射: 数字孪生 -> BK0091
+2026-01-03 17:24:12,798 - data.data_processor - INFO - 创建新板块映射: 电子纸 -> BK0092
+2026-01-03 17:24:12,806 - data.data_processor - INFO - 创建新板块映射: C2M概念 -> BK0093
+2026-01-03 17:24:12,814 - data.data_processor - INFO - 创建新板块映射: 国资云 -> BK0094
+2026-01-03 17:24:12,823 - data.data_processor - INFO - 创建新板块映射: 网络游戏 -> BK0095
+2026-01-03 17:24:12,831 - data.data_processor - INFO - 创建新板块映射: 央企国企改革 -> BK0096
+2026-01-03 17:24:12,838 - data.data_processor - INFO - 创建新板块映射: 互联网金融 -> BK0097
+2026-01-03 17:24:12,854 - data.data_processor - INFO - 创建新板块映射: 自由贸易港 -> BK0098
+2026-01-03 17:24:12,903 - data.data_processor - INFO - 创建新板块映射: 免税店 -> BK0099
+2026-01-03 17:24:12,953 - data.data_processor - INFO - 创建新板块映射: 独角兽概念 -> BK0100
+2026-01-03 17:24:12,969 - data.data_processor - INFO - 创建新板块映射: 可控核聚变 -> BK0101
+2026-01-03 17:24:12,976 - data.data_processor - INFO - 创建新板块映射: 手机游戏 -> BK0102
+2026-01-03 17:24:12,984 - data.data_processor - INFO - 创建新板块映射: 互联网保险 -> BK0103
+2026-01-03 17:24:12,989 - data.data_processor - INFO - 创建新板块映射: 食品安全 -> BK0104
+2026-01-03 17:24:12,994 - data.data_processor - INFO - 创建新板块映射: 中字头股票 -> BK0105
+2026-01-03 17:24:13,002 - data.data_processor - INFO - 创建新板块映射: 足球概念 -> BK0106
+2026-01-03 17:24:13,013 - data.data_processor - INFO - 创建新板块映射: 语音技术 -> BK0107
+2026-01-03 17:24:13,024 - data.data_processor - INFO - 创建新板块映射: 同花顺中特估100 -> BK0108
+2026-01-03 17:24:13,069 - data.data_processor - INFO - 创建新板块映射: 智能音箱 -> BK0109
+2026-01-03 17:24:13,133 - data.data_processor - INFO - 创建新板块映射: 毫米波雷达 -> BK0110
+2026-01-03 17:24:13,184 - data.data_processor - INFO - 创建新板块映射: 旅游概念 -> BK0111
+2026-01-03 17:24:13,193 - data.data_processor - INFO - 创建新板块映射: IP经济(谷子经济) -> BK0112
+2026-01-03 17:24:13,198 - data.data_processor - INFO - 创建新板块映射: 华为概念 -> BK0113
+2026-01-03 17:24:13,206 - data.data_processor - INFO - 创建新板块映射: 上海自贸区 -> BK0114
+2026-01-03 17:24:13,214 - data.data_processor - INFO - 创建新板块映射: 天津自贸区 -> BK0115
+2026-01-03 17:24:13,221 - data.data_processor - INFO - 创建新板块映射: 地下管网 -> BK0116
+2026-01-03 17:24:13,228 - data.data_processor - INFO - 创建新板块映射: 共同富裕示范区 -> BK0117
+2026-01-03 17:24:13,247 - data.data_processor - INFO - 创建新板块映射: 算力租赁 -> BK0118
+2026-01-03 17:24:13,297 - data.data_processor - INFO - 创建新板块映射: EDR概念 -> BK0119
+2026-01-03 17:24:13,342 - data.data_processor - INFO - 创建新板块映射: 长三角一体化 -> BK0120
+2026-01-03 17:24:13,350 - data.data_processor - INFO - 创建新板块映射: 化债概念(AMC概念) -> BK0121
+2026-01-03 17:24:13,356 - data.data_processor - INFO - 创建新板块映射: 创投 -> BK0122
+2026-01-03 17:24:13,360 - data.data_processor - INFO - 创建新板块映射: 海南自贸区 -> BK0123
+2026-01-03 17:24:13,367 - data.data_processor - INFO - 创建新板块映射: 跨境电商 -> BK0124
+2026-01-03 17:24:13,374 - data.data_processor - INFO - 创建新板块映射: MiniLED -> BK0125
+2026-01-03 17:24:13,381 - data.data_processor - INFO - 创建新板块映射: 光刻机 -> BK0126
+2026-01-03 17:24:13,387 - data.data_processor - INFO - 创建新板块映射: 黑龙江自贸区 -> BK0127
+2026-01-03 17:24:13,393 - data.data_processor - INFO - 创建新板块映射: 物联网 -> BK0128
+2026-01-03 17:24:13,401 - data.data_processor - INFO - 创建新板块映射: 水利 -> BK0129
+2026-01-03 17:24:13,410 - data.data_processor - INFO - 创建新板块映射: 智能穿戴 -> BK0130
+2026-01-03 17:24:13,419 - data.data_processor - INFO - 创建新板块映射: 横琴新区 -> BK0131
+2026-01-03 17:24:13,447 - data.data_processor - INFO - 创建新板块映射: 星闪概念 -> BK0132
+2026-01-03 17:24:13,527 - data.data_processor - INFO - 创建新板块映射: 智能医疗 -> BK0133
+2026-01-03 17:24:13,593 - data.data_processor - INFO - 创建新板块映射: 碳交易 -> BK0134
+2026-01-03 17:24:13,603 - data.data_processor - INFO - 创建新板块映射: 机器视觉 -> BK0135
+2026-01-03 17:24:13,612 - data.data_processor - INFO - 创建新板块映射: 国企改革 -> BK0136
+2026-01-03 17:24:13,623 - data.data_processor - INFO - 创建新板块映射: 核电 -> BK0137
+2026-01-03 17:24:13,642 - data.data_processor - INFO - 创建新板块映射: 雄安新区 -> BK0138
+2026-01-03 17:24:13,698 - data.data_processor - INFO - 创建新板块映射: 海工装备 -> BK0139
+2026-01-03 17:24:13,755 - data.data_processor - INFO - 创建新板块映射: 智慧灯杆 -> BK0140
+2026-01-03 17:24:13,815 - data.data_processor - INFO - 创建新板块映射: 光热发电 -> BK0141
+2026-01-03 17:24:13,839 - data.data_processor - INFO - 创建新板块映射: 房屋检测 -> BK0142
+2026-01-03 17:24:13,847 - data.data_processor - INFO - 创建新板块映射: 可燃冰 -> BK0143
+2026-01-03 17:24:13,852 - data.data_processor - INFO - 创建新板块映射: 赛马概念 -> BK0144
+2026-01-03 17:24:13,856 - data.data_processor - INFO - 创建新板块映射: 雅下水电概念 -> BK0145
+2026-01-03 17:24:13,867 - data.data_processor - INFO - 创建新板块映射: 柔性屏(折叠屏) -> BK0146
+2026-01-03 17:24:13,875 - data.data_processor - INFO - 创建新板块映射: 青蒿素 -> BK0147
+2026-01-03 17:24:13,886 - data.data_processor - INFO - 创建新板块映射: 家用电器 -> BK0148
+2026-01-03 17:24:13,916 - data.data_processor - INFO - 创建新板块映射: 体育产业 -> BK0149
+2026-01-03 17:24:13,972 - data.data_processor - INFO - 创建新板块映射: 无人驾驶 -> BK0150
+2026-01-03 17:24:14,028 - data.data_processor - INFO - 创建新板块映射: 黄金概念 -> BK0151
+2026-01-03 17:24:14,060 - data.data_processor - INFO - 创建新板块映射: 东数西算(算力) -> BK0152
+2026-01-03 17:24:14,067 - data.data_processor - INFO - 创建新板块映射: 毛发医疗 -> BK0153
+2026-01-03 17:24:14,073 - data.data_processor - INFO - 创建新板块映射: 烟草 -> BK0154
+2026-01-03 17:24:14,080 - data.data_processor - INFO - 创建新板块映射: 家庭医生 -> BK0155
+2026-01-03 17:24:14,085 - data.data_processor - INFO - 创建新板块映射: 高股息精选 -> BK0156
+2026-01-03 17:24:14,093 - data.data_processor - INFO - 创建新板块映射: 新型城镇化 -> BK0157
+2026-01-03 17:24:14,104 - data.data_processor - INFO - 创建新板块映射: 血氧仪 -> BK0158
+2026-01-03 17:24:14,133 - data.data_processor - INFO - 创建新板块映射: 工业大麻 -> BK0159
+2026-01-03 17:24:14,195 - data.data_processor - INFO - 创建新板块映射: 土壤修复 -> BK0160
+2026-01-03 17:24:14,210 - data.data_processor - INFO - 创建新板块映射: 特钢概念 -> BK0161
+2026-01-03 17:24:14,214 - data.data_processor - INFO - 创建新板块映射: 工业互联网 -> BK0162
+2026-01-03 17:24:14,222 - data.data_processor - INFO - 创建新板块映射: 净水概念 -> BK0163
+2026-01-03 17:24:14,227 - data.data_processor - INFO - 创建新板块映射: 三胎概念 -> BK0164
+2026-01-03 17:24:14,231 - data.data_processor - INFO - 创建新板块映射: 啤酒概念 -> BK0165
+2026-01-03 17:24:14,239 - data.data_processor - INFO - 创建新板块映射: HJT电池 -> BK0166
+2026-01-03 17:24:14,243 - data.data_processor - INFO - 创建新板块映射: 乡村振兴 -> BK0167
+2026-01-03 17:24:14,252 - data.data_processor - INFO - 创建新板块映射: 无人零售 -> BK0168
+2026-01-03 17:24:14,260 - data.data_processor - INFO - 创建新板块映射: 深圳国企改革 -> BK0169
+2026-01-03 17:24:14,265 - data.data_processor - INFO - 创建新板块映射: 高端装备 -> BK0170
+2026-01-03 17:24:14,268 - data.data_processor - INFO - 创建新板块映射: 智能家居 -> BK0171
+2026-01-03 17:24:14,281 - data.data_processor - INFO - 创建新板块映射: PPP概念 -> BK0172
+2026-01-03 17:24:14,297 - data.data_processor - INFO - 创建新板块映射: 污水处理 -> BK0173
+2026-01-03 17:24:14,334 - data.data_processor - INFO - 创建新板块映射: OLED -> BK0174
+2026-01-03 17:24:14,339 - data.data_processor - INFO - 创建新板块映射: 民爆概念 -> BK0175
+2026-01-03 17:24:14,348 - data.data_processor - INFO - 创建新板块映射: 参股保险 -> BK0176
+2026-01-03 17:24:14,355 - data.data_processor - INFO - 创建新板块映射: 参股券商 -> BK0177
+2026-01-03 17:24:14,362 - data.data_processor - INFO - 创建新板块映射: 高压氧舱 -> BK0178
+2026-01-03 17:24:14,371 - data.data_processor - INFO - 创建新板块映射: 金属钴 -> BK0179
+2026-01-03 17:24:14,378 - data.data_processor - INFO - 创建新板块映射: 宠物经济 -> BK0180
+2026-01-03 17:24:14,386 - data.data_processor - INFO - 创建新板块映射: 养老概念 -> BK0181
+2026-01-03 17:24:14,411 - data.data_processor - INFO - 创建新板块映射: 3D打印 -> BK0182
+2026-01-03 17:24:14,464 - data.data_processor - INFO - 创建新板块映射: ETC -> BK0183
+2026-01-03 17:24:14,514 - data.data_processor - INFO - 创建新板块映射: 装配式建筑 -> BK0184
+2026-01-03 17:24:14,575 - data.data_processor - INFO - 创建新板块映射: 代糖概念 -> BK0185
+2026-01-03 17:24:14,581 - data.data_processor - INFO - 创建新板块映射: 医疗废物处理 -> BK0186
+2026-01-03 17:24:14,590 - data.data_processor - INFO - 创建新板块映射: 一带一路 -> BK0187
+2026-01-03 17:24:14,599 - data.data_processor - INFO - 创建新板块映射: 新型烟草(电子烟) -> BK0188
+2026-01-03 17:24:14,608 - data.data_processor - INFO - 创建新板块映射: 超级品牌 -> BK0189
+2026-01-03 17:24:14,615 - data.data_processor - INFO - 创建新板块映射: 金属回收 -> BK0190
+2026-01-03 17:24:14,621 - data.data_processor - INFO - 创建新板块映射: 西部大开发 -> BK0191
+2026-01-03 17:24:14,638 - data.data_processor - INFO - 创建新板块映射: 金属铜 -> BK0192
+2026-01-03 17:24:14,671 - data.data_processor - INFO - 创建新板块映射: 光纤概念 -> BK0193
+2026-01-03 17:24:14,725 - data.data_processor - INFO - 创建新板块映射: AI眼镜 -> BK0194
+2026-01-03 17:24:14,770 - data.data_processor - INFO - 创建新板块映射: 冰雪产业 -> BK0195
+2026-01-03 17:24:14,779 - data.data_processor - INFO - 创建新板块映射: 融资融券 -> BK0196
+2026-01-03 17:24:14,785 - data.data_processor - INFO - 创建新板块映射: 电力物联网 -> BK0197
+2026-01-03 17:24:14,792 - data.data_processor - INFO - 创建新板块映射: TOPCON电池 -> BK0198
+2026-01-03 17:24:14,797 - data.data_processor - INFO - 创建新板块映射: 证金持股 -> BK0199
+2026-01-03 17:24:14,803 - data.data_processor - INFO - 创建新板块映射: 基因测序 -> BK0200
+2026-01-03 17:24:14,809 - data.data_processor - INFO - 创建新板块映射: 物业管理 -> BK0201
+2026-01-03 17:24:14,815 - data.data_processor - INFO - 创建新板块映射: 固废处理 -> BK0202
+2026-01-03 17:24:14,823 - data.data_processor - INFO - 创建新板块映射: 科创次新股 -> BK0203
+2026-01-03 17:24:14,841 - data.data_processor - INFO - 创建新板块映射: 特色小镇 -> BK0204
+2026-01-03 17:24:14,898 - data.data_processor - INFO - 创建新板块映射: 粤港澳大湾区 -> BK0205
+2026-01-03 17:24:14,940 - data.data_processor - INFO - 创建新板块映射: 深股通 -> BK0206
+2026-01-03 17:24:14,948 - data.data_processor - INFO - 创建新板块映射: 光刻胶 -> BK0207
+2026-01-03 17:24:14,956 - data.data_processor - INFO - 创建新板块映射: 苹果概念 -> BK0208
+2026-01-03 17:24:14,964 - data.data_processor - INFO - 创建新板块映射: 股权转让(并购重组) -> BK0209
+2026-01-03 17:24:14,968 - data.data_processor - INFO - 创建新板块映射: 沪股通 -> BK0210
+2026-01-03 17:24:14,977 - data.data_processor - INFO - 创建新板块映射: 高铁 -> BK0211
+2026-01-03 17:24:14,982 - data.data_processor - INFO - 创建新板块映射: 5G -> BK0212
+2026-01-03 17:24:14,989 - data.data_processor - INFO - 创建新板块映射: 智能座舱 -> BK0213
+2026-01-03 17:24:15,000 - data.data_processor - INFO - 创建新板块映射: 碳纤维 -> BK0214
+2026-01-03 17:24:15,008 - data.data_processor - INFO - 创建新板块映射: 同花顺果指数 -> BK0215
+2026-01-03 17:24:15,018 - data.data_processor - INFO - 创建新板块映射: 中芯国际概念 -> BK0216
+2026-01-03 17:24:15,032 - data.data_processor - INFO - 创建新板块映射: 专精特新 -> BK0217
+2026-01-03 17:24:15,062 - data.data_processor - INFO - 创建新板块映射: POE胶膜 -> BK0218
+2026-01-03 17:24:15,069 - data.data_processor - INFO - 创建新板块映射: 芯片概念 -> BK0219
+2026-01-03 17:24:15,076 - data.data_processor - INFO - 创建新板块映射: 特高压 -> BK0220
+2026-01-03 17:24:15,085 - data.data_processor - INFO - 创建新板块映射: 小金属概念 -> BK0221
+2026-01-03 17:24:15,094 - data.data_processor - INFO - 创建新板块映射: 俄乌冲突概念 -> BK0222
+2026-01-03 17:24:15,106 - data.data_processor - INFO - 创建新板块映射: 智能物流 -> BK0223
+2026-01-03 17:24:15,140 - data.data_processor - INFO - 创建新板块映射: ST板块 -> BK0224
+2026-01-03 17:24:15,184 - data.data_processor - INFO - 创建新板块映射: 机器人概念 -> BK0225
+2026-01-03 17:24:15,239 - data.data_processor - INFO - 创建新板块映射: 无线耳机 -> BK0226
+2026-01-03 17:24:15,296 - data.data_processor - INFO - 创建新板块映射: NMN概念 -> BK0227
+2026-01-03 17:24:15,314 - data.data_processor - INFO - 创建新板块映射: 中俄贸易概念 -> BK0228
+2026-01-03 17:24:15,318 - data.data_processor - INFO - 创建新板块映射: 回购增持再贷款概念 -> BK0229
+2026-01-03 17:24:15,327 - data.data_processor - INFO - 创建新板块映射: 小米概念 -> BK0230
+2026-01-03 17:24:15,335 - data.data_processor - INFO - 创建新板块映射: 水泥概念 -> BK0231
+2026-01-03 17:24:15,348 - data.data_processor - INFO - 创建新板块映射: 人造肉 -> BK0232
+2026-01-03 17:24:15,365 - data.data_processor - INFO - 创建新板块映射: 眼科医疗 -> BK0233
+2026-01-03 17:24:15,413 - data.data_processor - INFO - 创建新板块映射: 两轮车 -> BK0234
+2026-01-03 17:24:15,461 - data.data_processor - INFO - 创建新板块映射: 金属镍 -> BK0235
+2026-01-03 17:24:15,505 - data.data_processor - INFO - 创建新板块映射: 托育服务 -> BK0236
+2026-01-03 17:24:15,516 - data.data_processor - INFO - 创建新板块映射: 生态农业 -> BK0237
+2026-01-03 17:24:15,524 - data.data_processor - INFO - 创建新板块映射: 传感器 -> BK0238
+2026-01-03 17:24:15,531 - data.data_processor - INFO - 创建新板块映射: 合成生物 -> BK0239
+2026-01-03 17:24:15,544 - data.data_processor - INFO - 创建新板块映射: 猴痘概念 -> BK0240
+2026-01-03 17:24:15,552 - data.data_processor - INFO - 创建新板块映射: 天然气 -> BK0241
+2026-01-03 17:24:15,569 - data.data_processor - INFO - 创建新板块映射: 航运概念 -> BK0242
+2026-01-03 17:24:15,621 - data.data_processor - INFO - 创建新板块映射: 汽车电子 -> BK0243
+2026-01-03 17:24:15,678 - data.data_processor - INFO - 创建新板块映射: 新型工业化 -> BK0244
+2026-01-03 17:24:15,729 - data.data_processor - INFO - 创建新板块映射: 稀土永磁 -> BK0245
+2026-01-03 17:24:15,737 - data.data_processor - INFO - 创建新板块映射: 飞行汽车(eVTOL) -> BK0246
+2026-01-03 17:24:15,745 - data.data_processor - INFO - 创建新板块映射: 农机 -> BK0247
+2026-01-03 17:24:15,753 - data.data_processor - INFO - 创建新板块映射: 华为海思概念股 -> BK0248
+2026-01-03 17:24:15,761 - data.data_processor - INFO - 创建新板块映射: 超级电容 -> BK0249
+2026-01-03 17:24:15,764 - data.data_processor - INFO - 创建新板块映射: 金属锌 -> BK0250
+2026-01-03 17:24:15,791 - data.data_processor - INFO - 创建新板块映射: 参股银行 -> BK0251
+2026-01-03 17:24:15,850 - data.data_processor - INFO - 创建新板块映射: 国家大基金持股 -> BK0252
+2026-01-03 17:24:15,895 - data.data_processor - INFO - 创建新板块映射: 举牌 -> BK0253
+2026-01-03 17:24:15,903 - data.data_processor - INFO - 创建新板块映射: 阿尔茨海默概念 -> BK0254
+2026-01-03 17:24:15,909 - data.data_processor - INFO - 创建新板块映射: 英伟达概念 -> BK0255
+2026-01-03 17:24:15,914 - data.data_processor - INFO - 创建新板块映射: 人民币贬值受益 -> BK0256
+2026-01-03 17:24:15,922 - data.data_processor - INFO - 创建新板块映射: 光伏建筑一体化 -> BK0257
+2026-01-03 17:24:15,927 - data.data_processor - INFO - 创建新板块映射: 空气能热泵 -> BK0258
+2026-01-03 17:24:15,935 - data.data_processor - INFO - 创建新板块映射: 消费电子概念 -> BK0259
+2026-01-03 17:24:15,940 - data.data_processor - INFO - 创建新板块映射: 露营经济 -> BK0260
+2026-01-03 17:24:15,948 - data.data_processor - INFO - 创建新板块映射: PVDF概念 -> BK0261
+2026-01-03 17:24:15,956 - data.data_processor - INFO - 创建新板块映射: 医疗器械概念 -> BK0262
+2026-01-03 17:24:15,965 - data.data_processor - INFO - 创建新板块映射: 碳中和 -> BK0263
+2026-01-03 17:24:15,977 - data.data_processor - INFO - 创建新板块映射: 特斯拉概念 -> BK0264
+2026-01-03 17:24:15,985 - data.data_processor - INFO - 创建新板块映射: 石墨烯 -> BK0265
+2026-01-03 17:24:15,994 - data.data_processor - INFO - 创建新板块映射: 兵装重组概念 -> BK0266
+2026-01-03 17:24:16,009 - data.data_processor - INFO - 创建新板块映射: 氢能源 -> BK0267
+2026-01-03 17:24:16,040 - data.data_processor - INFO - 创建新板块映射: 民营医院 -> BK0268
+2026-01-03 17:24:16,102 - data.data_processor - INFO - 创建新板块映射: 风电 -> BK0269
+2026-01-03 17:24:16,158 - data.data_processor - INFO - 创建新板块映射: 可降解塑料 -> BK0270
+2026-01-03 17:24:16,211 - data.data_processor - INFO - 创建新板块映射: 虚拟电厂 -> BK0271
+2026-01-03 17:24:16,223 - data.data_processor - INFO - 创建新板块映射: 重组蛋白 -> BK0272
+2026-01-03 17:24:16,230 - data.data_processor - INFO - 创建新板块映射: 先进封装 -> BK0273
+2026-01-03 17:24:16,239 - data.data_processor - INFO - 创建新板块映射: 智能电网 -> BK0274
+2026-01-03 17:24:16,247 - data.data_processor - INFO - 创建新板块映射: 预制菜 -> BK0275
+2026-01-03 17:24:16,269 - data.data_processor - INFO - 创建新板块映射: 建筑节能 -> BK0276
+2026-01-03 17:24:16,323 - data.data_processor - INFO - 创建新板块映射: 钙钛矿电池 -> BK0277
+2026-01-03 17:24:16,378 - data.data_processor - INFO - 创建新板块映射: 无线充电 -> BK0278
+2026-01-03 17:24:16,437 - data.data_processor - INFO - 创建新板块映射: 幽门螺杆菌概念 -> BK0279
+2026-01-03 17:24:16,459 - data.data_processor - INFO - 创建新板块映射: 细胞免疫治疗 -> BK0280
+2026-01-03 17:24:16,467 - data.data_processor - INFO - 创建新板块映射: MCU芯片 -> BK0281
+2026-01-03 17:24:16,477 - data.data_processor - INFO - 创建新板块映射: 供销社 -> BK0282
+2026-01-03 17:24:16,486 - data.data_processor - INFO - 创建新板块映射: 2025中报预增 -> BK0283
+2026-01-03 17:24:16,502 - data.data_processor - INFO - 创建新板块映射: 换电概念 -> BK0284
+2026-01-03 17:24:16,528 - data.data_processor - INFO - 创建新板块映射: 数据中心 -> BK0285
+2026-01-03 17:24:16,575 - data.data_processor - INFO - 创建新板块映射: 同花顺出海50 -> BK0286
+2026-01-03 17:24:16,634 - data.data_processor - INFO - 创建新板块映射: 小米汽车 -> BK0287
+2026-01-03 17:24:16,695 - data.data_processor - INFO - 创建新板块映射: 肝炎概念 -> BK0288
+2026-01-03 17:24:16,722 - data.data_processor - INFO - 创建新板块映射: 创新药 -> BK0289
+2026-01-03 17:24:16,729 - data.data_processor - INFO - 创建新板块映射: CRO概念 -> BK0290
+2026-01-03 17:24:16,738 - data.data_processor - INFO - 创建新板块映射: 动物疫苗 -> BK0291
+2026-01-03 17:24:16,748 - data.data_processor - INFO - 创建新板块映射: 盐湖提锂 -> BK0292
+2026-01-03 17:24:16,760 - data.data_processor - INFO - 创建新板块映射: 第三代半导体 -> BK0293
+2026-01-03 17:24:16,791 - data.data_processor - INFO - 创建新板块映射: 光伏概念 -> BK0294
+2026-01-03 17:24:16,860 - data.data_processor - INFO - 创建新板块映射: 柔性直流输电 -> BK0295
+2026-01-03 17:24:16,914 - data.data_processor - INFO - 创建新板块映射: 金属铅 -> BK0296
+2026-01-03 17:24:16,931 - data.data_processor - INFO - 创建新板块映射: 垃圾分类 -> BK0297
+2026-01-03 17:24:16,937 - data.data_processor - INFO - 创建新板块映射: 动力电池回收 -> BK0298
+2026-01-03 17:24:16,944 - data.data_processor - INFO - 创建新板块映射: 统一大市场 -> BK0299
+2026-01-03 17:24:16,951 - data.data_processor - INFO - 创建新板块映射: 辅助生殖 -> BK0300
+2026-01-03 17:24:16,965 - data.data_processor - INFO - 创建新板块映射: 流感 -> BK0301
+2026-01-03 17:24:16,983 - data.data_processor - INFO - 创建新板块映射: 牙科医疗 -> BK0302
+2026-01-03 17:24:17,031 - data.data_processor - INFO - 创建新板块映射: 华为汽车 -> BK0303
+2026-01-03 17:24:17,090 - data.data_processor - INFO - 创建新板块映射: 粮食概念 -> BK0304
+2026-01-03 17:24:17,099 - data.data_processor - INFO - 创建新板块映射: 维生素 -> BK0305
+2026-01-03 17:24:17,106 - data.data_processor - INFO - 创建新板块映射: AI手机 -> BK0306
+2026-01-03 17:24:17,112 - data.data_processor - INFO - 创建新板块映射: 铜缆高速连接 -> BK0307
+2026-01-03 17:24:17,121 - data.data_processor - INFO - 创建新板块映射: 一体化压铸 -> BK0308
+2026-01-03 17:24:17,127 - data.data_processor - INFO - 创建新板块映射: PCB概念 -> BK0309
+2026-01-03 17:24:17,135 - data.data_processor - INFO - 创建新板块映射: 充电桩 -> BK0310
+2026-01-03 17:24:17,146 - data.data_processor - INFO - 创建新板块映射: 注册制次新股 -> BK0311
+2026-01-03 17:24:17,155 - data.data_processor - INFO - 创建新板块映射: 比亚迪概念 -> BK0312
+2026-01-03 17:24:17,170 - data.data_processor - INFO - 创建新板块映射: 冷链物流 -> BK0313
+2026-01-03 17:24:17,194 - data.data_processor - INFO - 创建新板块映射: 超超临界发电 -> BK0314
+2026-01-03 17:24:17,212 - data.data_processor - INFO - 创建新板块映射: 医美概念 -> BK0315
+2026-01-03 17:24:17,220 - data.data_processor - INFO - 创建新板块映射: 工业母机 -> BK0316
+2026-01-03 17:24:17,228 - data.data_processor - INFO - 创建新板块映射: 广东自贸区 -> BK0317
+2026-01-03 17:24:17,235 - data.data_processor - INFO - 创建新板块映射: 丙烯酸 -> BK0318
+2026-01-03 17:24:17,244 - data.data_processor - INFO - 创建新板块映射: 燃料电池 -> BK0319
+2026-01-03 17:24:17,253 - data.data_processor - INFO - 创建新板块映射: 绿色电力 -> BK0320
+2026-01-03 17:24:17,304 - data.data_processor - INFO - 创建新板块映射: 白酒概念 -> BK0321
+2026-01-03 17:24:17,366 - data.data_processor - INFO - 创建新板块映射: 生物质能发电 -> BK0322
+2026-01-03 17:24:17,420 - data.data_processor - INFO - 创建新板块映射: 仿制药一致性评价 -> BK0323
+2026-01-03 17:24:17,481 - data.data_processor - INFO - 创建新板块映射: 存储芯片 -> BK0324
+2026-01-03 17:24:17,503 - data.data_processor - INFO - 创建新板块映射: 2025三季报预增 -> BK0325
+2026-01-03 17:24:17,510 - data.data_processor - INFO - 创建新板块映射: 新能源汽车 -> BK0326
+2026-01-03 17:24:17,519 - data.data_processor - INFO - 创建新板块映射: 华为数字能源 -> BK0327
+2026-01-03 17:24:17,529 - data.data_processor - INFO - 创建新板块映射: 脑机接口 -> BK0328
+2026-01-03 17:24:17,544 - data.data_processor - INFO - 创建新板块映射: 减速器 -> BK0329
+2026-01-03 17:24:17,607 - data.data_processor - INFO - 创建新板块映射: 人形机器人 -> BK0330
+2026-01-03 17:24:17,720 - data.data_processor - INFO - 创建新板块映射: 土地流转 -> BK0331
+2026-01-03 17:24:17,841 - data.data_processor - INFO - 创建新板块映射: 氟化工概念 -> BK0332
+2026-01-03 17:24:17,864 - data.data_processor - INFO - 创建新板块映射: 长安汽车概念 -> BK0333
+2026-01-03 17:24:17,873 - data.data_processor - INFO - 创建新板块映射: F5G概念 -> BK0334
+2026-01-03 17:24:17,881 - data.data_processor - INFO - 创建新板块映射: 玉米 -> BK0335
+2026-01-03 17:24:17,896 - data.data_processor - INFO - 创建新板块映射: 页岩气 -> BK0336
+2026-01-03 17:24:17,911 - data.data_processor - INFO - 创建新板块映射: 富士康概念 -> BK0337
+2026-01-03 17:24:17,971 - data.data_processor - INFO - 创建新板块映射: 新疆振兴 -> BK0338
+2026-01-03 17:24:18,024 - data.data_processor - INFO - 创建新板块映射: 摘帽 -> BK0339
+2026-01-03 17:24:18,096 - data.data_processor - INFO - 创建新板块映射: 新股与次新股 -> BK0340
+2026-01-03 17:24:18,142 - data.data_processor - INFO - 创建新板块映射: 农业种植 -> BK0341
+2026-01-03 17:24:18,149 - data.data_processor - INFO - 创建新板块映射: 储能 -> BK0342
+2026-01-03 17:24:18,156 - data.data_processor - INFO - 创建新板块映射: 医药电商 -> BK0343
+2026-01-03 17:24:18,169 - data.data_processor - INFO - 创建新板块映射: 消毒剂 -> BK0344
+2026-01-03 17:24:18,182 - data.data_processor - INFO - 创建新板块映射: 煤化工概念 -> BK0345
+2026-01-03 17:24:18,198 - data.data_processor - INFO - 创建新板块映射: 猪肉 -> BK0346
+2026-01-03 17:24:18,256 - data.data_processor - INFO - 创建新板块映射: 期货概念 -> BK0347
+2026-01-03 17:24:18,316 - data.data_processor - INFO - 创建新板块映射: 同花顺漂亮100 -> BK0348
+2026-01-03 17:24:18,325 - data.data_processor - INFO - 创建新板块映射: 生物疫苗 -> BK0349
+2026-01-03 17:24:18,332 - data.data_processor - INFO - 创建新板块映射: 华为手机 -> BK0350
+2026-01-03 17:24:18,339 - data.data_processor - INFO - 创建新板块映射: 磷化工 -> BK0351
+2026-01-03 17:24:18,345 - data.data_processor - INFO - 创建新板块映射: 锂电池概念 -> BK0352
+2026-01-03 17:24:18,352 - data.data_processor - INFO - 创建新板块映射: 乳业 -> BK0353
+2026-01-03 17:24:18,359 - data.data_processor - INFO - 创建新板块映射: 大豆 -> BK0354
+2026-01-03 17:24:18,367 - data.data_processor - INFO - 创建新板块映射: 培育钻石 -> BK0355
+2026-01-03 17:24:18,373 - data.data_processor - INFO - 创建新板块映射: 钛白粉概念 -> BK0356
+2026-01-03 17:24:18,381 - data.data_processor - INFO - 创建新板块映射: 信托概念 -> BK0357
+2026-01-03 17:24:18,389 - data.data_processor - INFO - 创建新板块映射: 抽水蓄能 -> BK0358
+2026-01-03 17:24:18,401 - data.data_processor - INFO - 创建新板块映射: 固态电池 -> BK0359
+2026-01-03 17:24:18,429 - data.data_processor - INFO - 创建新板块映射: 农村电商 -> BK0360
+2026-01-03 17:24:18,450 - data.data_processor - INFO - 创建新板块映射: 染料 -> BK0361
+2026-01-03 17:24:18,458 - data.data_processor - INFO - 创建新板块映射: 芬太尼 -> BK0362
+2026-01-03 17:24:18,469 - data.data_processor - INFO - 创建新板块映射: 汽车芯片 -> BK0363
+2026-01-03 17:24:18,483 - data.data_processor - INFO - 创建新板块映射: 汽车热管理 -> BK0364
+2026-01-03 17:24:18,509 - data.data_processor - INFO - 创建新板块映射: 煤炭概念 -> BK0365
+2026-01-03 17:24:18,557 - data.data_processor - INFO - 创建新板块映射: 海峡两岸 -> BK0366
+2026-01-03 17:24:18,609 - data.data_processor - INFO - 创建新板块映射: PET铜箔 -> BK0367
+2026-01-03 17:24:18,657 - data.data_processor - INFO - 创建新板块映射: BC电池 -> BK0368
+2026-01-03 17:24:18,690 - data.data_processor - INFO - 创建新板块映射: 禽流感 -> BK0369
+2026-01-03 17:24:18,698 - data.data_processor - INFO - 创建新板块映射: 养鸡 -> BK0370
+2026-01-03 17:24:18,706 - data.data_processor - INFO - 创建新板块映射: 钒电池 -> BK0371
+2026-01-03 17:24:18,714 - data.data_processor - INFO - 创建新板块映射: 共封装光学(CPO) -> BK0372
+2026-01-03 17:24:18,723 - data.data_processor - INFO - 创建新板块映射: 化肥 -> BK0373
+2026-01-03 17:24:18,744 - data.data_processor - INFO - 创建新板块映射: 转基因 -> BK0374
+2026-01-03 17:24:18,804 - data.data_processor - INFO - 创建新板块映射: 减肥药 -> BK0375
+2026-01-03 17:24:18,858 - data.data_processor - INFO - 创建新板块映射: 草甘膦 -> BK0376
+2026-01-03 17:24:18,918 - data.data_processor - INFO - 创建新板块映射: 石墨电极 -> BK0377
+2026-01-03 17:24:18,928 - data.data_processor - INFO - 创建新板块映射: PEEK材料 -> BK0378
+2026-01-03 17:24:18,934 - data.data_processor - INFO - 创建新板块映射: 宁德时代概念 -> BK0379
+2026-01-03 17:24:18,942 - data.data_processor - INFO - 创建新板块映射: 环氧丙烷 -> BK0380
+2026-01-03 17:24:18,950 - data.data_processor - INFO - 创建新板块映射: 高压快充 -> BK0381
+2026-01-03 17:24:18,959 - data.data_processor - INFO - 创建新板块映射: 福建自贸区 -> BK0382
+2026-01-03 17:24:18,977 - data.data_processor - INFO - 创建新板块映射: 钠离子电池 -> BK0383
+2026-01-03 17:24:19,019 - data.data_processor - INFO - 创建新板块映射: 液冷服务器 -> BK0384
+2026-01-03 17:24:19,069 - data.data_processor - INFO - 创建新板块映射: 有机硅概念 -> BK0385
+2026-01-03 17:24:19,121 - data.data_processor - INFO - 创建新板块映射: 硅能源 -> BK0386
+2026-01-03 17:24:19,264 - data.data_processor - INFO - 成功保存 386 条板块数据到数据库
+2026-01-03 17:24:19,264 - __main__ - INFO - 每日数据获取完成
+2026-01-03 17:24:19,265 - __main__ - INFO - ==================================================
+2026-01-03 17:24:19,265 - __main__ - INFO - 检查模型训练状态...
+2026-01-03 17:25:34,172 - __main__ - INFO - ============================================================
+2026-01-03 17:25:34,172 - __main__ - INFO - A股板块涨停预测系统启动
+2026-01-03 17:25:34,172 - __main__ - INFO - 运行模式: predict
+2026-01-03 17:25:34,172 - __main__ - INFO - ============================================================
+2026-01-03 17:25:34,176 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:25:34,181 - __main__ - INFO - ==================================================
+2026-01-03 17:25:34,182 - __main__ - INFO - 开始生成今日预测...
+2026-01-03 17:25:34,183 - __main__ - INFO - 今日非交易日，跳过预测
+2026-01-03 17:25:34,184 - __main__ - INFO - 系统退出
+2026-01-03 17:26:03,817 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:26:03,877 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.html
+2026-01-03 17:27:06,637 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:27:06,745 - utils.report_generator - INFO - 预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.md
+2026-01-03 17:27:06,747 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.html
+2026-01-03 17:29:00,032 - __main__ - INFO - ============================================================
+2026-01-03 17:29:00,032 - __main__ - INFO - A股板块涨停预测系统启动
+2026-01-03 17:29:00,032 - __main__ - INFO - 运行模式: fetch
+2026-01-03 17:29:00,032 - __main__ - INFO - ============================================================
+2026-01-03 17:29:00,032 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:29:00,036 - __main__ - INFO - ==================================================
+2026-01-03 17:29:00,037 - __main__ - INFO - 开始获取每日数据...
+2026-01-03 17:29:00,037 - data.data_fetcher - INFO - 获取概念板块资金流向...
+2026-01-03 17:29:02,235 - data.data_fetcher - INFO - 成功获取 386 个概念板块资金流向数据
+2026-01-03 17:29:02,236 - data.data_fetcher - INFO - 获取行业板块资金流向...
+2026-01-03 17:29:02,697 - data.data_fetcher - INFO - 成功获取 90 个行业板块资金流向数据
+2026-01-03 17:29:02,698 - data.data_fetcher - INFO - 获取 20260103 涨停池数据...
+2026-01-03 17:29:08,565 - data.data_fetcher - INFO - 成功获取 57 只涨停股票数据
+2026-01-03 17:29:08,566 - data.data_fetcher - INFO - 获取北向资金板块排行...
+2026-01-03 17:29:10,723 - data.data_fetcher - INFO - 成功获取 86 个北向资金板块数据
+2026-01-03 17:29:10,724 - data.data_fetcher - INFO - 获取 20260103 龙虎榜数据...
+2026-01-03 17:29:10,724 - data.data_fetcher - WARNING - 数据获取失败 (尝试 1/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-03 17:29:12,725 - data.data_fetcher - WARNING - 数据获取失败 (尝试 2/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-03 17:29:14,726 - data.data_fetcher - WARNING - 数据获取失败 (尝试 3/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-03 17:29:14,732 - data.data_fetcher - INFO - 保存 concept_money_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260103\concept_money_flow.csv
+2026-01-03 17:29:14,736 - data.data_fetcher - INFO - 保存 industry_money_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260103\industry_money_flow.csv
+2026-01-03 17:29:14,740 - data.data_fetcher - INFO - 保存 limit_up_pool 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260103\limit_up_pool.csv
+2026-01-03 17:29:14,746 - data.data_fetcher - INFO - 保存 northbound_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260103\northbound_flow.csv
+2026-01-03 17:29:14,864 - data.data_processor - INFO - 成功保存 386 条板块数据到数据库
+2026-01-03 17:29:14,864 - __main__ - INFO - 每日数据获取完成
+2026-01-03 17:29:14,864 - __main__ - INFO - 系统退出
+2026-01-03 17:29:39,898 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:29:40,033 - utils.report_generator - INFO - 预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.md
+2026-01-03 17:29:40,049 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.html
+2026-01-03 17:36:07,700 - __main__ - INFO - ============================================================
+2026-01-03 17:36:07,700 - __main__ - INFO - A股板块涨停预测系统启动
+2026-01-03 17:36:07,700 - __main__ - INFO - 运行模式: predict
+2026-01-03 17:36:07,700 - __main__ - INFO - ============================================================
+2026-01-03 17:36:07,700 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:36:07,711 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-03 17:36:07,711 - __main__ - INFO - ==================================================
+2026-01-03 17:36:07,712 - __main__ - INFO - 开始生成今日预测...
+2026-01-03 17:36:07,713 - __main__ - INFO - 今日非交易日，跳过预测
+2026-01-03 17:36:07,714 - __main__ - INFO - 系统退出
+2026-01-03 17:36:38,342 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:36:38,347 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-03 17:36:38,376 - utils.report_generator - INFO - 预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.md
+2026-01-03 17:36:38,381 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.html
+2026-01-03 17:37:29,338 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:37:29,343 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-03 17:37:29,345 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-03 17:37:29,385 - backtest.database - INFO - 已记录 5 条预测到回测数据库
+2026-01-03 17:37:29,387 - utils.report_generator - INFO - 预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.md
+2026-01-03 17:37:29,391 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-03.html
+2026-01-03 17:39:01,768 - __main__ - INFO - ============================================================
+2026-01-03 17:39:01,768 - __main__ - INFO - A股板块涨停预测系统启动
+2026-01-03 17:39:01,768 - __main__ - INFO - 运行模式: backtest
+2026-01-03 17:39:01,768 - __main__ - INFO - ============================================================
+2026-01-03 17:39:01,770 - data.data_processor - INFO - 数据库初始化完成
+2026-01-03 17:39:01,774 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-03 17:39:01,779 - __main__ - INFO - 系统退出
