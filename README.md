@@ -1227,4 +1227,4 @@ def validate_data_completeness(df, min_history_days=30):
 
 ---
 
-**版本**：1.0 | **更新时间**：2026年1月3日 | **作者**：Forecast Block Team
+**版本**：1.0 | **更新时间**：2026年1月3日 | **作者**：Ianchiou28
