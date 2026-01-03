@@ -15,10 +15,10 @@ if errorlevel 1 (
 
 REM 检查依赖
 echo [1/3] 检查依赖包...
-pip show akshare >nul 2>&1
+python -c "import akshare" >nul 2>&1
 if errorlevel 1 (
     echo 正在安装依赖包...
-    pip install -r requirements.txt
+    python -m pip install -r requirements.txt
 )
 
 echo.

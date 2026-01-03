@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A股板块涨停预测</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="top-bar">
+            <div class="logo">
+                <i class="fas fa-bullseye"></i> A股板块涨停预测系统
+            </div>
+            <div class="system-info">
+                <span class="date-display" id="current-time">DATE: 2026-01-03</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="content-area-full">
+            <!-- Hero Prediction Card -->
+            <div class="hero-prediction">
+                <div class="hero-header">
+                    <div class="hero-date">
+                        <input type="date" id="report-date" value="2026-01-03">
+                        <button id="refresh-btn"><i class="fas fa-sync-alt"></i></button>
+                    </div>
+                    <div class="hero-label">TODAY'S TOP 5 PREDICTIONS</div>
+                </div>
+                
+                <div id="predictions-list" class="predictions-list">
+                    <!-- Predictions will be injected here -->
+                </div>
+            </div>
+
+            <!-- Backtest Section -->
+            <div class="backtest-section">
+                <div class="backtest-header">
+                    <h2><i class="fas fa-chart-line"></i> 回测绩效</h2>
+                    <button id="load-backtest-btn"><i class="fas fa-sync-alt"></i> 刷新</button>
+                </div>
+                
+                <!-- Performance Summary -->
+                <div class="performance-cards">
+                    <div class="perf-card">
+                        <span class="perf-label">整体命中率</span>
+                        <span class="perf-value" id="perf-hit-rate">--</span>
+                    </div>
+                    <div class="perf-card">
+                        <span class="perf-label">平均日收益</span>
+                        <span class="perf-value" id="perf-avg-return">--</span>
+                    </div>
+                    <div class="perf-card">
+                        <span class="perf-label">累计收益</span>
+                        <span class="perf-value" id="perf-total-return">--</span>
+                    </div>
+                    <div class="perf-card">
+                        <span class="perf-label">捕获涨停</span>
+                        <span class="perf-value" id="perf-limit-up">--</span>
+                    </div>
+                </div>
+                
+                <!-- Rank Hit Rate -->
+                <div class="rank-hit-rates">
+                    <div class="rank-item">
+                        <span class="rank-label">Top-1 命中率</span>
+                        <div class="rank-bar-container">
+                            <div class="rank-bar" id="bar-top1" style="width: 0%"></div>
+                        </div>
+                        <span class="rank-value" id="rate-top1">--</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-label">Top-3 命中率</span>
+                        <div class="rank-bar-container">
+                            <div class="rank-bar" id="bar-top3" style="width: 0%"></div>
+                        </div>
+                        <span class="rank-value" id="rate-top3">--</span>
+                    </div>
+                    <div class="rank-item">
+                        <span class="rank-label">Top-5 命中率</span>
+                        <div class="rank-bar-container">
+                            <div class="rank-bar" id="bar-top5" style="width: 0%"></div>
+                        </div>
+                        <span class="rank-value" id="rate-top5">--</span>
+                    </div>
+                </div>
+                
+                <!-- History Table -->
+                <div class="history-section">
+                    <h3>历史预测记录</h3>
+                    <div class="history-table-container">
+                        <table class="history-table">
+                            <thead>
+                                <tr>
+                                    <th>预测日期</th>
+                                    <th>板块</th>
+                                    <th>排名</th>
+                                    <th>实际涨幅</th>
+                                    <th>涨停数</th>
+                                    <th>命中</th>
+                                </tr>
+                            </thead>
+                            <tbody id="history-tbody">
+                                <!-- History will be injected here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="status-bar">
+                <div class="status-item">
+                    <i class="fas fa-circle online"></i> 系统在线
+                </div>
+                <div class="status-item">
+                    <i class="fas fa-clock"></i> <span id="update-time">--</span>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
