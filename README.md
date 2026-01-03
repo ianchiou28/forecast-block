@@ -1183,24 +1183,30 @@ def validate_data_completeness(df, min_history_days=30):
 
 本系统的理论基础可概括为一个**"四层金字塔"**：
 
-```
-                    ▲
-                    │
-           第四层：动态调整与风险管理
-          （滚动训练、预警机制）
-                    │
-        ┌───────────┴───────────┐
-        │                       │
-    机器学习       第三层       性能评估
-   （LightGBM）  模型与评估   （NDCG、Hit Rate）
-        │                       │
-        └───────────┬───────────┘
-                    │
-           第二层：特征工程
-         （量价背离、资金蓄力）
-                    │
-         第一层：市场理论
-        （涨停潮、资金流向）
+```mermaid
+graph BT
+    %% 定义样式
+    classDef layer fill:#ffffff,stroke:#333,stroke-width:2px,color:#000;
+    classDef top fill:#4db8ff,stroke:#01579b,stroke-width:3px,color:#000;
+
+    %% 节点定义
+    L1[第一层：市场理论<br/><sub>涨停潮、资金流向</sub>]:::layer
+    L2[第二层：特征工程<br/><sub>量价背离、资金蓄力</sub>]:::layer
+    
+    subgraph L3_Group [第三层：模型与评估]
+        direction LR
+        L3A[机器学习<br/><sub>LightGBM</sub>]:::layer
+        L3B[性能评估<br/><sub>NDCG、Hit Rate</sub>]:::layer
+    end
+    
+    L4[第四层：动态调整与风险管理<br/><sub>滚动训练、预警机制</sub>]:::top
+
+    %% 连接关系
+    L1 --> L2
+    L2 --> L3A
+    L2 --> L3B
+    L3A --> L4
+    L3B --> L4
 ```
 
 **各层的创新**：
