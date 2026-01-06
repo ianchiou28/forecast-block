@@ -1,6 +1,6 @@
 """
 A股ETF预测系统 - ETF预测模型模块
-使用LightGBM进行ETF涨跌预测
+使用深度神经网络(Deep Neural Network)进行ETF涨跌预测
 """
 import pandas as pd
 import numpy as np
@@ -10,8 +10,13 @@ import logging
 import pickle
 import json
 from pathlib import Path
+import os
 
-import lightgbm as lgb
+import torch
+import torch.nn as nn
+import torch.optim as optim
+from torch.utils.data import DataLoader, TensorDataset
+from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error, ndcg_score
 
@@ -20,26 +25,69 @@ from data.etf_data_processor import ETFFeatureEngineer
 
 logger = logging.getLogger(__name__)
 
+# 设置随机种子以保证可复现性
+def set_seed(seed=42):
+    np.random.seed(seed)
+    torch.manual_seed(seed)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed(seed)
+
+set_seed(42)
+
+class ETFNet(nn.Module):
+    """ETF预测深度神经网络模型"""
+    def __init__(self, input_dim, hidden_dim1=64, hidden_dim2=32, dropout_rate=0.2):
+        super(ETFNet, self).__init__()
+        self.layer1 = nn.Linear(input_dim, hidden_dim1)
+        self.relu1 = nn.ReLU()
+        self.dropout1 = nn.Dropout(dropout_rate)
+        
+        self.layer2 = nn.Linear(hidden_dim1, hidden_dim2)
+        self.relu2 = nn.ReLU()
+        self.dropout2 = nn.Dropout(dropout_rate)
+        
+        self.output = nn.Linear(hidden_dim2, 1)
+        
+    def forward(self, x):
+        x = self.layer1(x)
+        x = self.relu1(x)
+        x = self.dropout1(x)
+        
+        x = self.layer2(x)
+        x = self.relu2(x)
+        x = self.dropout2(x)
+        
+        x = self.output(x)
+        return x
 
 class ETFPredictModel:
-    """ETF预测模型"""
+    """ETF预测模型 (基于深度神经网络)"""
     
     def __init__(self):
         self.model = None
+        self.scaler = StandardScaler()
         self.feature_engineer = ETFFeatureEngineer()
         self.feature_columns = self.feature_engineer.get_feature_columns()
         self.model_config = MODEL_CONFIG
-        self.model_path = MODEL_DIR / "etf_predict_model.pkl"
+        self.model_path = MODEL_DIR / "etf_predict_model.pth"
+        self.scaler_path = MODEL_DIR / "etf_scaler.pkl"
         self.feature_importance_path = MODEL_DIR / "etf_feature_importance.csv"
+        
+        # 检查是否有GPU
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+        logger.info(f"使用计算设备: {self.device}")
     
     def train(self, df: pd.DataFrame, 
               train_start: str = None,
               train_end: str = None,
-              valid_ratio: float = 0.2) -> Dict:
+              valid_ratio: float = 0.2,
+              epochs: int = 100,
+              batch_size: int = 32,
+              learning_rate: float = 0.001) -> Dict:
         """
         训练ETF预测模型
         """
-        logger.info("开始ETF模型训练...")
+        logger.info("开始ETF深度神经网络模型训练...")
         
         # 数据过滤
         if train_start:
@@ -56,53 +104,93 @@ class ETFPredictModel:
         
         # 准备特征和标签
         available_features = [c for c in self.feature_columns if c in df.columns]
-        X = df[available_features].fillna(0)
-        y = df["label_score"]
+        X = df[available_features].fillna(0).values
+        y = df["label_score"].values
+        
+        logger.info(f"特征数: {len(available_features)}")
         
         # 划分训练集和验证集
         split_idx = int(len(X) * (1 - valid_ratio))
-        X_train, X_valid = X.iloc[:split_idx], X.iloc[split_idx:]
-        y_train, y_valid = y.iloc[:split_idx], y.iloc[split_idx:]
+        X_train_raw, X_valid_raw = X[:split_idx], X[split_idx:]
+        y_train, y_valid = y[:split_idx], y[split_idx:]
+        
+        # 数据标准化
+        X_train = self.scaler.fit_transform(X_train_raw)
+        X_valid = self.scaler.transform(X_valid_raw)
+        
+        # 转换为Tensor
+        X_train_tensor = torch.FloatTensor(X_train).to(self.device)
+        y_train_tensor = torch.FloatTensor(y_train).view(-1, 1).to(self.device)
+        X_valid_tensor = torch.FloatTensor(X_valid).to(self.device)
+        y_valid_tensor = torch.FloatTensor(y_valid).view(-1, 1).to(self.device)
+        
+        # 创建DataLoader
+        train_dataset = TensorDataset(X_train_tensor, y_train_tensor)
+        train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+        
+        # 初始化模型
+        input_dim = len(available_features)
+        self.model = ETFNet(input_dim).to(self.device)
+        
+        # 定义损失函数和优化器
+        criterion = nn.MSELoss()
+        optimizer = optim.Adam(self.model.parameters(), lr=learning_rate)
         
         logger.info(f"ETF训练集: {len(X_train)} 样本, 验证集: {len(X_valid)} 样本")
-        logger.info(f"特征数: {len(available_features)}")
         
-        # 创建LightGBM数据集
-        train_data = lgb.Dataset(X_train, label=y_train)
-        valid_data = lgb.Dataset(X_valid, label=y_valid, reference=train_data)
+        # 训练循环
+        best_valid_loss = float('inf')
+        patience = 10
+        patience_counter = 0
+        best_model_state = None
         
-        # 训练参数
-        params = {
-            "objective": "regression",
-            "metric": "mse",
-            "boosting_type": "gbdt",
-            "num_leaves": 31,
-            "learning_rate": 0.05,
-            "feature_fraction": 0.8,
-            "bagging_fraction": 0.8,
-            "bagging_freq": 5,
-            "verbose": -1,
-            "n_estimators": 300,
-            "early_stopping_rounds": 30,
-        }
+        for epoch in range(epochs):
+            self.model.train()
+            train_loss = 0.0
+            
+            for batch_X, batch_y in train_loader:
+                optimizer.zero_grad()
+                outputs = self.model(batch_X)
+                loss = criterion(outputs, batch_y)
+                loss.backward()
+                optimizer.step()
+                train_loss += loss.item() * batch_X.size(0)
+            
+            train_loss /= len(train_loader.dataset)
+            
+            # 验证
+            self.model.eval()
+            with torch.no_grad():
+                valid_outputs = self.model(X_valid_tensor)
+                valid_loss = criterion(valid_outputs, y_valid_tensor).item()
+            
+            if (epoch + 1) % 10 == 0:
+                logger.info(f"Epoch [{epoch+1}/{epochs}], Train Loss: {train_loss:.4f}, Valid Loss: {valid_loss:.4f}")
+            
+            # 早停机制
+            if valid_loss < best_valid_loss:
+                best_valid_loss = valid_loss
+                best_model_state = self.model.state_dict()
+                patience_counter = 0
+            else:
+                patience_counter += 1
+                if patience_counter >= patience:
+                    logger.info(f"Early stopping at epoch {epoch+1}")
+                    break
         
-        self.model = lgb.train(
-            params,
-            train_data,
-            valid_sets=[train_data, valid_data],
-            valid_names=["train", "valid"],
-            num_boost_round=params.get("n_estimators", 300),
-            callbacks=[
-                lgb.early_stopping(params.get("early_stopping_rounds", 30)),
-                lgb.log_evaluation(period=50)
-            ]
-        )
+        # 加载最佳模型
+        if best_model_state:
+            self.model.load_state_dict(best_model_state)
         
-        # 计算验证集指标
-        y_pred = self.model.predict(X_valid)
+        # 计算最终验证集指标
+        self.model.eval()
+        with torch.no_grad():
+            y_pred_tensor = self.model(X_valid_tensor)
+            y_pred = y_pred_tensor.cpu().numpy().flatten()
+            
         mse = mean_squared_error(y_valid, y_pred)
         
-        # 计算NDCG
+        # 计算NDCG (复用原有逻辑)
         df_valid = df.iloc[split_idx:].copy()
         df_valid["pred_score"] = y_pred
         
@@ -121,11 +209,16 @@ class ETFPredictModel:
         
         avg_ndcg = np.mean(ndcg_scores) if ndcg_scores else 0
         
-        # 保存模型
+        # 保存模型和Scaler
         self.save_model()
         
-        # 保存特征重要性
-        self._save_feature_importance(available_features)
+        # 特征重要性 (深度学习模型不如树模型直观，这里使用简单的梯度或权重分析替代，或者暂时略过)
+        # 简单的权重绝对值平均作为重要性近似
+        try:
+            importances = np.abs(self.model.layer1.weight.detach().cpu().numpy()).mean(axis=0)
+            self._save_feature_importance(available_features, importances)
+        except:
+            pass
         
         result = {
             "status": "success",
@@ -133,7 +226,7 @@ class ETFPredictModel:
             "valid_samples": len(X_valid),
             "mse": mse,
             "ndcg@5": avg_ndcg,
-            "best_iteration": self.model.best_iteration,
+            "best_valid_loss": best_valid_loss,
         }
         
         logger.info(f"ETF模型训练完成: MSE={mse:.4f}, NDCG@5={avg_ndcg:.4f}")
@@ -152,10 +245,21 @@ class ETFPredictModel:
         
         # 准备特征
         available_features = [c for c in self.feature_columns if c in df.columns]
-        X = df[available_features].fillna(0)
+        # 确保特征维度匹配 (如果在训练时只有部分特征，这里可能会有问题，需假设特征一致)
+        # 为了健壮性，我们可以检查输入特征数量和Scaler的特征数量
+        if hasattr(self.scaler, 'n_features_in_'):
+             if len(available_features) != self.scaler.n_features_in_:
+                 logger.warning(f"预测特征数量({len(available_features)})与训练时({self.scaler.n_features_in_})不一致，可能导致错误")
+
+        X = df[available_features].fillna(0).values
         
         # 预测
-        scores = self.model.predict(X)
+        self.model.eval()
+        with torch.no_grad():
+            X_scaled = self.scaler.transform(X)
+            X_tensor = torch.FloatTensor(X_scaled).to(self.device)
+            scores_tensor = self.model(X_tensor)
+            scores = scores_tensor.cpu().numpy().flatten()
         
         # 构建结果
         result = df[["date", "etf_code", "etf_name"]].copy()
@@ -228,27 +332,46 @@ class ETFPredictModel:
         """保存模型"""
         if self.model is not None:
             MODEL_DIR.mkdir(parents=True, exist_ok=True)
-            with open(self.model_path, "wb") as f:
-                pickle.dump(self.model, f)
+            # 保存PyTorch模型
+            torch.save(self.model.state_dict(), self.model_path)
+            # 保存Scaler
+            with open(self.scaler_path, "wb") as f:
+                pickle.dump(self.scaler, f)
             logger.info(f"ETF模型已保存: {self.model_path}")
     
     def load_model(self) -> bool:
         """加载模型"""
-        if self.model_path.exists():
-            with open(self.model_path, "rb") as f:
-                self.model = pickle.load(f)
-            logger.info(f"ETF模型已加载: {self.model_path}")
-            return True
+        if self.model_path.exists() and self.scaler_path.exists():
+            try:
+                # 加载Scaler
+                with open(self.scaler_path, "rb") as f:
+                    self.scaler = pickle.load(f)
+                
+                # 初始化并加载模型
+                # 注意：这里需要知道输入维度，暂时假设在predict时可以推断或之前已初始化
+                # 为了解决这个问题，我们可以在加载时先不初始化model，在predict时根据scaler的feature数初始化
+                n_features = self.scaler.n_features_in_
+                self.model = ETFNet(n_features).to(self.device)
+                self.model.load_state_dict(torch.load(self.model_path, map_location=self.device))
+                self.model.eval()
+                
+                logger.info(f"ETF模型已加载: {self.model_path}")
+                return True
+            except Exception as e:
+                logger.error(f"模型加载失败: {e}")
+                return False
+        
         logger.warning("ETF模型文件不存在")
         return False
     
-    def _save_feature_importance(self, feature_names: List[str]):
+    def _save_feature_importance(self, feature_names: List[str], importances: np.ndarray = None):
         """保存特征重要性"""
-        importance = self.model.feature_importance(importance_type="gain")
-        
+        if importances is None:
+            return
+            
         df_importance = pd.DataFrame({
             "feature": feature_names,
-            "importance": importance
+            "importance": importances
         }).sort_values("importance", ascending=False)
         
         df_importance.to_csv(self.feature_importance_path, index=False)
