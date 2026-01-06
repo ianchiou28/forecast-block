@@ -1,0 +1,92 @@
+2026-01-06 10:35:37,278 - __main__ - INFO - ============================================================
+2026-01-06 10:35:37,278 - __main__ - INFO - A股预测系统启动
+2026-01-06 10:35:37,279 - __main__ - INFO - 运行模式: predict
+2026-01-06 10:35:37,279 - __main__ - INFO - ============================================================
+2026-01-06 10:35:37,292 - data.data_processor - INFO - 数据库初始化完成
+2026-01-06 10:35:37,307 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-06 10:35:37,307 - __main__ - INFO - ==================================================
+2026-01-06 10:35:37,308 - __main__ - INFO - 开始生成今日预测...
+2026-01-06 10:35:37,510 - __main__ - WARNING - 特征数据为空，使用简单排名预测
+2026-01-06 10:35:37,544 - backtest.database - INFO - 已记录 5 条预测到回测数据库
+2026-01-06 10:35:37,544 - __main__ - INFO - 预测已记录到回测数据库
+2026-01-06 10:35:37,547 - utils.report_generator - INFO - 预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-06.md
+2026-01-06 10:35:37,551 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-06.html
+2026-01-06 10:35:37,561 - __main__ - INFO - 系统退出
+2026-01-06 10:40:15,825 - __main__ - INFO - ============================================================
+2026-01-06 10:40:15,825 - __main__ - INFO - A股预测系统启动
+2026-01-06 10:40:15,826 - __main__ - INFO - 运行模式: etf-train
+2026-01-06 10:40:15,826 - __main__ - INFO - ============================================================
+2026-01-06 10:40:15,829 - data.etf_data_processor - INFO - ETF数据库表初始化完成
+2026-01-06 10:40:15,829 - models.etf_predictor - INFO - 使用计算设备: cuda
+2026-01-06 10:40:15,830 - __main__ - INFO - ==================================================
+2026-01-06 10:40:15,830 - __main__ - INFO - 检查ETF模型训练状态...
+2026-01-06 10:40:15,845 - data.etf_data_processor - INFO - 加载 1400 条历史ETF数据
+2026-01-06 10:40:16,500 - data.etf_data_processor - INFO - 计算完成 1400 条ETF特征数据
+2026-01-06 10:40:16,503 - models.etf_predictor - INFO - ETF滚动训练: 2024-01-16 ~ 2026-01-05
+2026-01-06 10:40:16,504 - models.etf_predictor - INFO - 开始ETF深度神经网络模型训练...
+2026-01-06 10:40:16,510 - models.etf_predictor - INFO - 特征数: 19
+2026-01-06 10:40:19,979 - models.etf_predictor - INFO - ETF训练集: 1092 样本, 验证集: 273 样本
+2026-01-06 10:40:21,455 - models.etf_predictor - INFO - Epoch [10/100], Train Loss: 0.0851, Valid Loss: 0.1146
+2026-01-06 10:40:22,657 - models.etf_predictor - INFO - Epoch [20/100], Train Loss: 0.0791, Valid Loss: 0.1134
+2026-01-06 10:40:23,800 - models.etf_predictor - INFO - Epoch [30/100], Train Loss: 0.0781, Valid Loss: 0.1122
+2026-01-06 10:40:24,988 - models.etf_predictor - INFO - Epoch [40/100], Train Loss: 0.0763, Valid Loss: 0.1155
+2026-01-06 10:40:25,467 - models.etf_predictor - INFO - Early stopping at epoch 44
+2026-01-06 10:40:25,538 - models.etf_predictor - INFO - ETF模型已保存: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_predict_model.pth
+2026-01-06 10:40:25,545 - models.etf_predictor - INFO - ETF特征重要性已保存: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_feature_importance.csv
+2026-01-06 10:40:25,546 - models.etf_predictor - INFO - ETF模型训练完成: MSE=0.1134, NDCG@5=0.7054
+2026-01-06 10:40:25,546 - __main__ - INFO - ETF模型训练完成
+2026-01-06 10:40:25,547 - __main__ - INFO - 系统退出
+2026-01-06 10:40:53,905 - __main__ - INFO - ============================================================
+2026-01-06 10:40:53,905 - __main__ - INFO - A股预测系统启动
+2026-01-06 10:40:53,906 - __main__ - INFO - 运行模式: predict
+2026-01-06 10:40:53,906 - __main__ - INFO - ============================================================
+2026-01-06 10:40:53,908 - data.data_processor - INFO - 数据库初始化完成
+2026-01-06 10:40:53,915 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-06 10:40:53,915 - __main__ - INFO - ==================================================
+2026-01-06 10:40:53,916 - __main__ - INFO - 开始生成今日预测...
+2026-01-06 10:40:54,068 - __main__ - WARNING - 特征数据为空，使用简单排名预测
+2026-01-06 10:40:54,080 - backtest.database - INFO - 已记录 5 条预测到回测数据库
+2026-01-06 10:40:54,080 - __main__ - INFO - 预测已记录到回测数据库
+2026-01-06 10:40:54,084 - utils.report_generator - INFO - 预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-06.md
+2026-01-06 10:40:54,087 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-06.html
+2026-01-06 10:40:54,093 - __main__ - INFO - 系统退出
+2026-01-06 10:41:28,209 - __main__ - INFO - ============================================================
+2026-01-06 10:41:28,210 - __main__ - INFO - A股预测系统启动
+2026-01-06 10:41:28,210 - __main__ - INFO - 运行模式: etf-train
+2026-01-06 10:41:28,210 - __main__ - INFO - ============================================================
+2026-01-06 10:41:28,212 - data.etf_data_processor - INFO - ETF数据库表初始化完成
+2026-01-06 10:41:28,213 - models.etf_predictor - INFO - 使用计算设备: cuda
+2026-01-06 10:41:28,213 - __main__ - INFO - ==================================================
+2026-01-06 10:41:28,213 - __main__ - INFO - 检查ETF模型训练状态...
+2026-01-06 10:41:28,227 - data.etf_data_processor - INFO - 加载 1400 条历史ETF数据
+2026-01-06 10:41:28,921 - data.etf_data_processor - INFO - 计算完成 1400 条ETF特征数据
+2026-01-06 10:41:28,926 - models.etf_predictor - INFO - ETF滚动训练: 2024-01-16 ~ 2026-01-05
+2026-01-06 10:41:28,926 - models.etf_predictor - INFO - 开始ETF深度神经网络模型训练...
+2026-01-06 10:41:28,932 - models.etf_predictor - INFO - 特征数: 19
+2026-01-06 10:41:31,818 - models.etf_predictor - INFO - ETF训练集: 1092 样本, 验证集: 273 样本
+2026-01-06 10:41:33,348 - models.etf_predictor - INFO - Epoch [10/100], Train Loss: 0.0851, Valid Loss: 0.1146
+2026-01-06 10:41:34,735 - models.etf_predictor - INFO - Epoch [20/100], Train Loss: 0.0791, Valid Loss: 0.1134
+2026-01-06 10:41:35,906 - models.etf_predictor - INFO - Epoch [30/100], Train Loss: 0.0781, Valid Loss: 0.1122
+2026-01-06 10:41:37,151 - models.etf_predictor - INFO - Epoch [40/100], Train Loss: 0.0763, Valid Loss: 0.1155
+2026-01-06 10:41:37,724 - models.etf_predictor - INFO - Early stopping at epoch 44
+2026-01-06 10:41:37,800 - models.etf_predictor - INFO - ETF模型已保存: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_predict_model.pth
+2026-01-06 10:41:37,809 - models.etf_predictor - INFO - ETF特征重要性已保存: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_feature_importance.csv
+2026-01-06 10:41:37,810 - models.etf_predictor - INFO - ETF模型训练完成: MSE=0.1134, NDCG@5=0.7054
+2026-01-06 10:41:37,810 - __main__ - INFO - ETF模型训练完成
+2026-01-06 10:41:37,811 - __main__ - INFO - 系统退出
+2026-01-06 10:42:01,355 - __main__ - INFO - ============================================================
+2026-01-06 10:42:01,356 - __main__ - INFO - A股预测系统启动
+2026-01-06 10:42:01,357 - __main__ - INFO - 运行模式: etf-predict
+2026-01-06 10:42:01,357 - __main__ - INFO - ============================================================
+2026-01-06 10:42:01,359 - data.etf_data_processor - INFO - ETF数据库表初始化完成
+2026-01-06 10:42:01,360 - models.etf_predictor - INFO - 使用计算设备: cuda
+2026-01-06 10:42:01,361 - __main__ - INFO - ==================================================
+2026-01-06 10:42:01,362 - __main__ - INFO - 开始生成今日ETF预测...
+2026-01-06 10:42:01,377 - data.etf_data_processor - INFO - 加载 1400 条历史ETF数据
+2026-01-06 10:42:02,147 - data.etf_data_processor - INFO - 计算完成 1400 条ETF特征数据
+2026-01-06 10:42:02,151 - __main__ - INFO - 使用 2026-01-05 ETF数据进行预测
+2026-01-06 10:42:02,322 - models.etf_predictor - INFO - ETF模型已加载: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_predict_model.pth
+2026-01-06 10:42:02,453 - models.etf_predictor - INFO - ETF预测完成，Top-5: ['5GETF', '环保ETF', '光伏ETF', '游戏ETF', '芯片ETF']
+2026-01-06 10:42:02,462 - __main__ - INFO - 已记录 5 条ETF预测
+2026-01-06 10:42:02,465 - __main__ - INFO - ETF预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\etf_prediction_report_2026-01-06.md
+2026-01-06 10:42:02,476 - __main__ - INFO - 系统退出
