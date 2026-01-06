@@ -1,0 +1,28 @@
+2026-01-04 00:29:04,050 - __main__ - INFO - ============================================================
+2026-01-04 00:29:04,052 - __main__ - INFO - A股板块涨停预测系统启动
+2026-01-04 00:29:04,052 - __main__ - INFO - 运行模式: fetch
+2026-01-04 00:29:04,052 - __main__ - INFO - ============================================================
+2026-01-04 00:29:04,068 - data.data_processor - INFO - 数据库初始化完成
+2026-01-04 00:29:04,078 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-04 00:29:04,078 - __main__ - INFO - ==================================================
+2026-01-04 00:29:04,078 - __main__ - INFO - 开始获取每日数据...
+2026-01-04 00:29:04,078 - data.data_fetcher - INFO - 获取概念板块资金流向...
+2026-01-04 00:29:05,617 - data.data_fetcher - INFO - 成功获取 386 个概念板块资金流向数据
+2026-01-04 00:29:05,617 - data.data_fetcher - INFO - 获取行业板块资金流向...
+2026-01-04 00:29:06,617 - data.data_fetcher - INFO - 成功获取 90 个行业板块资金流向数据
+2026-01-04 00:29:06,617 - data.data_fetcher - INFO - 获取 20260104 涨停池数据...
+2026-01-04 00:29:07,169 - data.data_fetcher - INFO - 成功获取 57 只涨停股票数据
+2026-01-04 00:29:07,170 - data.data_fetcher - INFO - 获取北向资金板块排行...
+2026-01-04 00:29:08,348 - data.data_fetcher - INFO - 成功获取 86 个北向资金板块数据
+2026-01-04 00:29:08,348 - data.data_fetcher - INFO - 获取 20260104 龙虎榜数据...
+2026-01-04 00:29:08,348 - data.data_fetcher - WARNING - 数据获取失败 (尝试 1/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-04 00:29:10,349 - data.data_fetcher - WARNING - 数据获取失败 (尝试 2/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-04 00:29:12,350 - data.data_fetcher - WARNING - 数据获取失败 (尝试 3/3): stock_lhb_detail_em() got an unexpected keyword argument 'date'
+2026-01-04 00:29:12,362 - data.data_fetcher - INFO - 保存 concept_money_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260104\concept_money_flow.csv
+2026-01-04 00:29:12,364 - data.data_fetcher - INFO - 保存 industry_money_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260104\industry_money_flow.csv
+2026-01-04 00:29:12,366 - data.data_fetcher - INFO - 保存 limit_up_pool 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260104\limit_up_pool.csv
+2026-01-04 00:29:12,370 - data.data_fetcher - INFO - 保存 northbound_flow 数据到 C:\Users\ian28\Desktop\forecast-block\data\raw\20260104\northbound_flow.csv
+2026-01-04 00:29:12,414 - data.data_processor - INFO - 成功保存 386 条板块数据到数据库
+2026-01-04 00:29:12,416 - backtest.database - INFO - 没有待验证的预测记录
+2026-01-04 00:29:12,416 - __main__ - INFO - 每日数据获取完成
+2026-01-04 00:29:12,416 - __main__ - INFO - 系统退出

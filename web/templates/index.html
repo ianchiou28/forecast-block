@@ -46,45 +46,45 @@
                 <!-- Performance Summary -->
                 <div class="performance-cards">
                     <div class="perf-card">
-                        <span class="perf-label">整体命中率</span>
-                        <span class="perf-value" id="perf-hit-rate">--</span>
+                        <span class="perf-label">胜率</span>
+                        <span class="perf-value" id="perf-win-rate">--</span>
                     </div>
                     <div class="perf-card">
-                        <span class="perf-label">平均日收益</span>
-                        <span class="perf-value" id="perf-avg-return">--</span>
+                        <span class="perf-label">超额胜率</span>
+                        <span class="perf-value" id="perf-beat-market">--</span>
                     </div>
                     <div class="perf-card">
                         <span class="perf-label">累计收益</span>
                         <span class="perf-value" id="perf-total-return">--</span>
                     </div>
                     <div class="perf-card">
-                        <span class="perf-label">捕获涨停</span>
-                        <span class="perf-value" id="perf-limit-up">--</span>
+                        <span class="perf-label">夏普比率</span>
+                        <span class="perf-value" id="perf-sharpe">--</span>
                     </div>
                 </div>
                 
                 <!-- Rank Hit Rate -->
                 <div class="rank-hit-rates">
                     <div class="rank-item">
-                        <span class="rank-label">Top-1 命中率</span>
+                        <span class="rank-label">涨幅>1%命中</span>
                         <div class="rank-bar-container">
-                            <div class="rank-bar" id="bar-top1" style="width: 0%"></div>
+                            <div class="rank-bar" id="bar-hit1" style="width: 0%"></div>
                         </div>
-                        <span class="rank-value" id="rate-top1">--</span>
+                        <span class="rank-value" id="rate-hit1">--</span>
                     </div>
                     <div class="rank-item">
-                        <span class="rank-label">Top-3 命中率</span>
+                        <span class="rank-label">涨幅>2%命中</span>
                         <div class="rank-bar-container">
-                            <div class="rank-bar" id="bar-top3" style="width: 0%"></div>
+                            <div class="rank-bar" id="bar-hit2" style="width: 0%"></div>
                         </div>
-                        <span class="rank-value" id="rate-top3">--</span>
+                        <span class="rank-value" id="rate-hit2">--</span>
                     </div>
                     <div class="rank-item">
-                        <span class="rank-label">Top-5 命中率</span>
+                        <span class="rank-label">涨幅>3%命中</span>
                         <div class="rank-bar-container">
-                            <div class="rank-bar" id="bar-top5" style="width: 0%"></div>
+                            <div class="rank-bar" id="bar-hit3" style="width: 0%"></div>
                         </div>
-                        <span class="rank-value" id="rate-top5">--</span>
+                        <span class="rank-value" id="rate-hit3">--</span>
                     </div>
                 </div>
                 
@@ -95,11 +95,10 @@
                         <table class="history-table">
                             <thead>
                                 <tr>
-                                    <th>预测日期</th>
+                                    <th>日期</th>
                                     <th>板块</th>
                                     <th>排名</th>
                                     <th>实际涨幅</th>
-                                    <th>涨停数</th>
                                     <th>命中</th>
                                 </tr>
                             </thead>

@@ -1,0 +1,542 @@
+2026-01-05 15:08:44,233 - __main__ - INFO - ============================================================
+2026-01-05 15:08:44,233 - __main__ - INFO - A股板块涨停预测系统启动
+2026-01-05 15:08:44,234 - __main__ - INFO - 运行模式: predict
+2026-01-05 15:08:44,234 - __main__ - INFO - ============================================================
+2026-01-05 15:08:44,246 - data.data_processor - INFO - 数据库初始化完成
+2026-01-05 15:08:44,261 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-05 15:08:44,262 - __main__ - INFO - ==================================================
+2026-01-05 15:08:44,263 - __main__ - INFO - 开始生成今日预测...
+2026-01-05 15:08:44,476 - __main__ - WARNING - 特征数据为空，使用简单排名预测
+2026-01-05 15:08:44,498 - backtest.database - INFO - 已记录 5 条预测到回测数据库
+2026-01-05 15:08:44,498 - __main__ - INFO - 预测已记录到回测数据库
+2026-01-05 15:08:44,501 - utils.report_generator - INFO - 预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-05.md
+2026-01-05 15:08:44,505 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-05.html
+2026-01-05 15:08:44,514 - __main__ - INFO - 系统退出
+2026-01-05 15:23:03,810 - __main__ - INFO - ============================================================
+2026-01-05 15:23:03,811 - __main__ - INFO - A股预测系统启动
+2026-01-05 15:23:03,811 - __main__ - INFO - 运行模式: etf-full
+2026-01-05 15:23:03,811 - __main__ - INFO - ============================================================
+2026-01-05 15:23:03,856 - data.etf_data_processor - INFO - ETF数据库表初始化完成
+2026-01-05 15:23:03,857 - __main__ - INFO - 执行ETF完整流程...
+2026-01-05 15:23:03,858 - __main__ - INFO - ==================================================
+2026-01-05 15:23:03,858 - __main__ - INFO - 开始获取ETF历史数据 (近60天)...
+2026-01-05 15:23:03,859 - data.etf_data_fetcher - INFO - 获取ETF池历史数据 (近60天)...
+2026-01-05 15:23:43,053 - data.etf_data_fetcher - INFO - 成功获取 35 只ETF的历史数据
+2026-01-05 15:23:43,341 - __main__ - INFO - ETF历史数据获取完成，共 2100 条记录
+2026-01-05 15:23:43,342 - __main__ - INFO - ==================================================
+2026-01-05 15:23:43,342 - __main__ - INFO - 检查ETF模型训练状态...
+2026-01-05 15:23:43,363 - data.etf_data_processor - INFO - 加载 1435 条历史ETF数据
+2026-01-05 15:23:44,436 - data.etf_data_processor - INFO - 计算完成 1435 条ETF特征数据
+2026-01-05 15:23:44,438 - models.etf_predictor - INFO - ETF滚动训练: 2024-01-16 ~ 2026-01-05
+2026-01-05 15:23:44,439 - models.etf_predictor - INFO - 开始ETF模型训练...
+2026-01-05 15:23:44,445 - models.etf_predictor - INFO - ETF训练集: 1120 样本, 验证集: 280 样本
+2026-01-05 15:23:44,445 - models.etf_predictor - INFO - 特征数: 19
+2026-01-05 15:23:45,154 - models.etf_predictor - INFO - ETF模型已保存: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_predict_model.pkl
+2026-01-05 15:23:45,164 - models.etf_predictor - INFO - ETF特征重要性已保存: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_feature_importance.csv
+2026-01-05 15:23:45,164 - models.etf_predictor - INFO - ETF模型训练完成: MSE=0.1110, NDCG@5=0.6975
+2026-01-05 15:23:45,165 - __main__ - INFO - ETF模型训练完成
+2026-01-05 15:23:45,166 - __main__ - INFO - ==================================================
+2026-01-05 15:23:45,166 - __main__ - INFO - 开始生成今日ETF预测...
+2026-01-05 15:23:45,182 - data.etf_data_processor - INFO - 加载 1435 条历史ETF数据
+2026-01-05 15:23:46,323 - data.etf_data_processor - INFO - 计算完成 1435 条ETF特征数据
+2026-01-05 15:23:46,326 - __main__ - INFO - 使用 2026-01-05 ETF数据进行预测
+2026-01-05 15:23:46,336 - models.etf_predictor - INFO - ETF预测完成，Top-5: ['有色金属ETF', '环保ETF', '人工智能ETF', '光伏ETF', '稀土ETF']
+2026-01-05 15:23:46,354 - __main__ - INFO - 已记录 5 条ETF预测
+2026-01-05 15:23:46,387 - __main__ - INFO - ETF预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\etf_prediction_report_2026-01-05.md
+2026-01-05 15:23:46,398 - __main__ - INFO - 系统退出
+2026-01-05 15:24:19,762 - __main__ - INFO - ============================================================
+2026-01-05 15:24:19,764 - __main__ - INFO - A股预测系统启动
+2026-01-05 15:24:19,766 - __main__ - INFO - 运行模式: all-predict
+2026-01-05 15:24:19,768 - __main__ - INFO - ============================================================
+2026-01-05 15:24:19,769 - __main__ - INFO - ============================================================
+2026-01-05 15:24:19,770 - __main__ - INFO - 📈 开始板块预测...
+2026-01-05 15:24:19,774 - __main__ - INFO - ============================================================
+2026-01-05 15:24:19,784 - data.data_processor - INFO - 数据库初始化完成
+2026-01-05 15:24:19,788 - backtest.database - INFO - 回测数据库初始化完成: C:\Users\ian28\Desktop\forecast-block\data\backtest.db
+2026-01-05 15:24:19,789 - __main__ - INFO - ==================================================
+2026-01-05 15:24:19,789 - __main__ - INFO - 开始生成今日预测...
+2026-01-05 15:24:20,079 - __main__ - WARNING - 特征数据为空，使用简单排名预测
+2026-01-05 15:24:20,091 - backtest.database - INFO - 已记录 5 条预测到回测数据库
+2026-01-05 15:24:20,091 - __main__ - INFO - 预测已记录到回测数据库
+2026-01-05 15:24:20,093 - utils.report_generator - INFO - 预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-05.md
+2026-01-05 15:24:20,094 - utils.report_generator - INFO - HTML报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\prediction_report_2026-01-05.html
+2026-01-05 15:24:20,100 - __main__ - INFO - ============================================================
+2026-01-05 15:24:20,101 - __main__ - INFO - 📊 开始ETF预测...
+2026-01-05 15:24:20,101 - __main__ - INFO - ============================================================
+2026-01-05 15:24:20,103 - data.etf_data_processor - INFO - ETF数据库表初始化完成
+2026-01-05 15:24:20,103 - __main__ - INFO - ==================================================
+2026-01-05 15:24:20,104 - __main__ - INFO - 开始生成今日ETF预测...
+2026-01-05 15:24:20,124 - data.etf_data_processor - INFO - 加载 1435 条历史ETF数据
+2026-01-05 15:24:21,501 - data.etf_data_processor - INFO - 计算完成 1435 条ETF特征数据
+2026-01-05 15:24:21,506 - __main__ - INFO - 使用 2026-01-05 ETF数据进行预测
+2026-01-05 15:24:21,559 - models.etf_predictor - INFO - ETF模型已加载: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_predict_model.pkl
+2026-01-05 15:24:21,585 - models.etf_predictor - INFO - ETF预测完成，Top-5: ['有色金属ETF', '环保ETF', '人工智能ETF', '光伏ETF', '稀土ETF']
+2026-01-05 15:24:21,606 - __main__ - INFO - 已记录 5 条ETF预测
+2026-01-05 15:24:21,612 - __main__ - INFO - ETF预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\etf_prediction_report_2026-01-05.md
+2026-01-05 15:24:21,616 - __main__ - INFO - 系统退出
+2026-01-05 15:32:10,298 - __main__ - INFO - ============================================================
+2026-01-05 15:32:10,298 - __main__ - INFO - A股预测系统启动
+2026-01-05 15:32:10,299 - __main__ - INFO - 运行模式: etf-backtest-run
+2026-01-05 15:32:10,299 - __main__ - INFO - ============================================================
+2026-01-05 15:32:10,299 - __main__ - INFO - ============================================================
+2026-01-05 15:32:10,299 - __main__ - INFO - 📊 开始ETF滚动回测（3年数据）...
+2026-01-05 15:32:10,300 - __main__ - INFO - ============================================================
+2026-01-05 15:32:10,301 - __main__ - INFO - 本地无缓存，获取3年ETF历史数据...
+2026-01-05 15:32:10,301 - backtest.etf_backtest_engine - INFO - 获取ETF历史数据: 2023-01-06 ~ 2026-01-05 (3年)
+2026-01-05 15:32:10,301 - backtest.etf_backtest_engine - INFO - [1/35] 获取 沪深300ETF (510300)...
+2026-01-05 15:32:22,151 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:22,652 - backtest.etf_backtest_engine - INFO - [2/35] 获取 中证500ETF (510500)...
+2026-01-05 15:32:23,283 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:23,784 - backtest.etf_backtest_engine - INFO - [3/35] 获取 创业板ETF (159915)...
+2026-01-05 15:32:24,352 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:24,853 - backtest.etf_backtest_engine - INFO - [4/35] 获取 上证50ETF (510050)...
+2026-01-05 15:32:25,564 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:26,065 - backtest.etf_backtest_engine - INFO - [5/35] 获取 科创50ETF (588000)...
+2026-01-05 15:32:26,586 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:27,087 - backtest.etf_backtest_engine - INFO - [6/35] 获取 深证100ETF (159901)...
+2026-01-05 15:32:27,927 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:28,428 - backtest.etf_backtest_engine - INFO - [7/35] 获取 中证1000ETF (512100)...
+2026-01-05 15:32:29,027 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:29,528 - backtest.etf_backtest_engine - INFO - [8/35] 获取 半导体ETF (512480)...
+2026-01-05 15:32:30,192 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:30,693 - backtest.etf_backtest_engine - INFO - [9/35] 获取 新能源车ETF (515030)...
+2026-01-05 15:32:31,445 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:31,948 - backtest.etf_backtest_engine - INFO - [10/35] 获取 白酒ETF (512690)...
+2026-01-05 15:32:32,916 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:33,418 - backtest.etf_backtest_engine - INFO - [11/35] 获取 军工ETF (512660)...
+2026-01-05 15:32:34,153 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:34,654 - backtest.etf_backtest_engine - INFO - [12/35] 获取 医药ETF (512010)...
+2026-01-05 15:32:35,653 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:36,154 - backtest.etf_backtest_engine - INFO - [13/35] 获取 光伏ETF (515790)...
+2026-01-05 15:32:36,975 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:37,476 - backtest.etf_backtest_engine - INFO - [14/35] 获取 银行ETF (512800)...
+2026-01-05 15:32:38,104 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:38,605 - backtest.etf_backtest_engine - INFO - [15/35] 获取 证券ETF (512880)...
+2026-01-05 15:32:39,100 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:39,601 - backtest.etf_backtest_engine - INFO - [16/35] 获取 5GETF (515050)...
+2026-01-05 15:32:40,058 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:40,559 - backtest.etf_backtest_engine - INFO - [17/35] 获取 有色金属ETF (512400)...
+2026-01-05 15:32:41,150 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:41,651 - backtest.etf_backtest_engine - INFO - [18/35] 获取 农业ETF (159825)...
+2026-01-05 15:32:42,126 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:42,626 - backtest.etf_backtest_engine - INFO - [19/35] 获取 房地产ETF (512200)...
+2026-01-05 15:32:43,164 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:43,665 - backtest.etf_backtest_engine - INFO - [20/35] 获取 稀土ETF (516150)...
+2026-01-05 15:32:44,297 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:44,799 - backtest.etf_backtest_engine - INFO - [21/35] 获取 煤炭ETF (515220)...
+2026-01-05 15:32:45,750 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:46,251 - backtest.etf_backtest_engine - INFO - [22/35] 获取 旅游ETF (159766)...
+2026-01-05 15:32:47,070 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:47,571 - backtest.etf_backtest_engine - INFO - [23/35] 获取 环保ETF (512580)...
+2026-01-05 15:32:48,213 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:48,714 - backtest.etf_backtest_engine - INFO - [24/35] 获取 芯片ETF (512760)...
+2026-01-05 15:32:49,443 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:49,944 - backtest.etf_backtest_engine - INFO - [25/35] 获取 计算机ETF (512720)...
+2026-01-05 15:32:50,546 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:51,046 - backtest.etf_backtest_engine - INFO - [26/35] 获取 消费ETF (159928)...
+2026-01-05 15:32:51,827 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:52,327 - backtest.etf_backtest_engine - INFO - [27/35] 获取 医疗ETF (512170)...
+2026-01-05 15:32:52,923 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:53,424 - backtest.etf_backtest_engine - INFO - [28/35] 获取 游戏ETF (159869)...
+2026-01-05 15:32:54,165 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:54,666 - backtest.etf_backtest_engine - INFO - [29/35] 获取 科技ETF (515000)...
+2026-01-05 15:32:55,273 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:55,774 - backtest.etf_backtest_engine - INFO - [30/35] 获取 传媒ETF (512980)...
+2026-01-05 15:32:56,464 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:56,965 - backtest.etf_backtest_engine - INFO - [31/35] 获取 人工智能ETF (159740)...
+2026-01-05 15:32:57,466 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:57,966 - backtest.etf_backtest_engine - INFO - [32/35] 获取 国防ETF (512670)...
+2026-01-05 15:32:58,572 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:32:59,072 - backtest.etf_backtest_engine - INFO - [33/35] 获取 云计算ETF (516510)...
+2026-01-05 15:32:59,770 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:33:00,271 - backtest.etf_backtest_engine - INFO - [34/35] 获取 储能ETF (159607)...
+2026-01-05 15:33:00,917 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:33:01,419 - backtest.etf_backtest_engine - INFO - [35/35] 获取 电力ETF (159611)...
+2026-01-05 15:33:02,041 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 15:33:02,546 - backtest.etf_backtest_engine - INFO - ETF历史数据获取完成: 25375 条, 35 只ETF
+2026-01-05 15:33:02,837 - backtest.etf_backtest_engine - INFO - ETF历史数据已保存: C:\Users\ian28\Desktop\forecast-block\data\historical\etf_history_3y.csv
+2026-01-05 15:33:02,838 - backtest.etf_backtest_engine - INFO - 开始ETF滚动回测: 2025-01-05 -> 2026-01-05
+2026-01-05 15:33:02,838 - backtest.etf_backtest_engine - INFO - 训练窗口: 24个月
+2026-01-05 15:33:02,838 - backtest.etf_backtest_engine - INFO - 创建ETF特征数据集...
+2026-01-05 15:33:17,173 - backtest.etf_backtest_engine - INFO - ETF特征工程完成: 25340 条数据, 35 只ETF
+2026-01-05 15:33:17,186 - backtest.etf_backtest_engine - INFO - 使用特征: 42 个
+2026-01-05 15:33:17,193 - backtest.etf_backtest_engine - INFO - 测试日期: 241 天
+2026-01-05 15:33:18,880 - backtest.etf_backtest_engine - INFO - [2025-01] 训练完成, 样本: 16695
+2026-01-05 15:33:20,805 - backtest.etf_backtest_engine - INFO - [2025-02] 训练完成, 样本: 16660
+2026-01-05 15:33:23,003 - backtest.etf_backtest_engine - INFO - [2025-03] 训练完成, 样本: 16660
+2026-01-05 15:33:25,308 - backtest.etf_backtest_engine - INFO - [2025-04] 训练完成, 样本: 16695
+2026-01-05 15:33:27,286 - backtest.etf_backtest_engine - INFO - [2025-05] 训练完成, 样本: 16660
+2026-01-05 15:33:29,932 - backtest.etf_backtest_engine - INFO - [2025-06] 训练完成, 样本: 16625
+2026-01-05 15:33:32,749 - backtest.etf_backtest_engine - INFO - [2025-07] 训练完成, 样本: 16695
+2026-01-05 15:33:35,197 - backtest.etf_backtest_engine - INFO - [2025-08] 训练完成, 样本: 16695
+2026-01-05 15:33:37,204 - backtest.etf_backtest_engine - INFO - [2025-09] 训练完成, 样本: 16695
+2026-01-05 15:33:39,200 - backtest.etf_backtest_engine - INFO - [2025-10] 训练完成, 样本: 16695
+2026-01-05 15:33:41,245 - backtest.etf_backtest_engine - INFO - [2025-11] 训练完成, 样本: 16695
+2026-01-05 15:33:43,327 - backtest.etf_backtest_engine - INFO - [2025-12] 训练完成, 样本: 16695
+2026-01-05 15:33:43,946 - backtest.etf_backtest_engine - INFO - 
+============================================================
+2026-01-05 15:33:43,947 - backtest.etf_backtest_engine - INFO - 📊 ETF回测结果评估
+2026-01-05 15:33:43,948 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 15:33:45,161 - backtest.etf_backtest_engine - INFO - 
+📅 统计周期: 2025-01-06 ~ 2025-12-31
+2026-01-05 15:33:45,162 - backtest.etf_backtest_engine - INFO - 📈 总交易天数: 241
+2026-01-05 15:33:45,162 - backtest.etf_backtest_engine - INFO - 🎯 平均命中率: 27.55%
+2026-01-05 15:33:45,163 - backtest.etf_backtest_engine - INFO - 💰 Top5平均日收益: 0.127%
+2026-01-05 15:33:45,164 - backtest.etf_backtest_engine - INFO - 📊 基准平均日收益: 0.145%
+2026-01-05 15:33:45,165 - backtest.etf_backtest_engine - INFO - 💎 平均超额收益: -0.019%
+2026-01-05 15:33:45,165 - backtest.etf_backtest_engine - INFO - 📈 累计超额收益: -4.49%
+2026-01-05 15:33:45,165 - backtest.etf_backtest_engine - INFO - 🏆 超额收益胜率: 121/241 (50.21%)
+2026-01-05 15:33:45,166 - backtest.etf_backtest_engine - INFO - 📉 最大回撤: 10.06%
+2026-01-05 15:33:45,166 - backtest.etf_backtest_engine - INFO - 📊 夏普比率: -0.49
+2026-01-05 15:33:45,167 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 15:33:45,202 - backtest.etf_backtest_engine - INFO - 详细结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_detail_20260105_153345.csv
+2026-01-05 15:33:45,206 - backtest.etf_backtest_engine - INFO - 统计结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_stats_20260105_153345.csv
+2026-01-05 15:33:45,208 - backtest.etf_backtest_engine - INFO - 回测报告已生成: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_report_20260105_153345.md
+2026-01-05 15:33:45,215 - __main__ - INFO - 系统退出
+2026-01-05 20:10:35,459 - __main__ - INFO - ============================================================
+2026-01-05 20:10:35,460 - __main__ - INFO - A股预测系统启动
+2026-01-05 20:10:35,460 - __main__ - INFO - 运行模式: etf-backtest-run
+2026-01-05 20:10:35,461 - __main__ - INFO - ============================================================
+2026-01-05 20:10:35,462 - __main__ - INFO - ============================================================
+2026-01-05 20:10:35,462 - __main__ - INFO - 📊 开始ETF滚动回测（3年数据）...
+2026-01-05 20:10:35,463 - __main__ - INFO - ============================================================
+2026-01-05 20:10:35,465 - __main__ - INFO - 本地无缓存，获取3年ETF历史数据...
+2026-01-05 20:10:35,465 - backtest.etf_backtest_engine - INFO - 获取ETF历史数据: 2023-01-06 ~ 2026-01-05 (3年)
+2026-01-05 20:10:35,465 - backtest.etf_backtest_engine - INFO - [1/35] 获取 沪深300ETF (510300)...
+2026-01-05 20:10:47,639 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:10:48,140 - backtest.etf_backtest_engine - INFO - [2/35] 获取 中证500ETF (510500)...
+2026-01-05 20:10:49,433 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:10:49,935 - backtest.etf_backtest_engine - INFO - [3/35] 获取 创业板ETF (159915)...
+2026-01-05 20:10:51,249 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:10:51,750 - backtest.etf_backtest_engine - INFO - [4/35] 获取 上证50ETF (510050)...
+2026-01-05 20:10:53,635 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:10:54,136 - backtest.etf_backtest_engine - INFO - [5/35] 获取 科创50ETF (588000)...
+2026-01-05 20:10:55,135 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:10:55,636 - backtest.etf_backtest_engine - INFO - [6/35] 获取 深证100ETF (159901)...
+2026-01-05 20:10:56,985 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:10:57,488 - backtest.etf_backtest_engine - INFO - [7/35] 获取 中证1000ETF (512100)...
+2026-01-05 20:10:58,872 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:10:59,374 - backtest.etf_backtest_engine - INFO - [8/35] 获取 半导体ETF (512480)...
+2026-01-05 20:11:00,418 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:00,919 - backtest.etf_backtest_engine - INFO - [9/35] 获取 新能源车ETF (515030)...
+2026-01-05 20:11:02,156 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:02,657 - backtest.etf_backtest_engine - INFO - [10/35] 获取 白酒ETF (512690)...
+2026-01-05 20:11:03,902 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:04,405 - backtest.etf_backtest_engine - INFO - [11/35] 获取 军工ETF (512660)...
+2026-01-05 20:11:05,532 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:06,034 - backtest.etf_backtest_engine - INFO - [12/35] 获取 医药ETF (512010)...
+2026-01-05 20:11:08,078 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:08,582 - backtest.etf_backtest_engine - INFO - [13/35] 获取 光伏ETF (515790)...
+2026-01-05 20:11:10,138 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:10,640 - backtest.etf_backtest_engine - INFO - [14/35] 获取 银行ETF (512800)...
+2026-01-05 20:11:11,987 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:12,488 - backtest.etf_backtest_engine - INFO - [15/35] 获取 证券ETF (512880)...
+2026-01-05 20:11:13,884 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:14,386 - backtest.etf_backtest_engine - INFO - [16/35] 获取 5GETF (515050)...
+2026-01-05 20:11:15,346 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:15,848 - backtest.etf_backtest_engine - INFO - [17/35] 获取 有色金属ETF (512400)...
+2026-01-05 20:11:17,358 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:17,862 - backtest.etf_backtest_engine - INFO - [18/35] 获取 农业ETF (159825)...
+2026-01-05 20:11:19,108 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:19,610 - backtest.etf_backtest_engine - INFO - [19/35] 获取 房地产ETF (512200)...
+2026-01-05 20:11:20,955 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:21,456 - backtest.etf_backtest_engine - INFO - [20/35] 获取 稀土ETF (516150)...
+2026-01-05 20:11:22,727 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:23,228 - backtest.etf_backtest_engine - INFO - [21/35] 获取 煤炭ETF (515220)...
+2026-01-05 20:11:24,124 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:24,625 - backtest.etf_backtest_engine - INFO - [22/35] 获取 旅游ETF (159766)...
+2026-01-05 20:11:25,559 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:26,063 - backtest.etf_backtest_engine - INFO - [23/35] 获取 环保ETF (512580)...
+2026-01-05 20:11:27,417 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:27,919 - backtest.etf_backtest_engine - INFO - [24/35] 获取 芯片ETF (512760)...
+2026-01-05 20:11:28,580 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:29,082 - backtest.etf_backtest_engine - INFO - [25/35] 获取 计算机ETF (512720)...
+2026-01-05 20:11:30,820 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:31,321 - backtest.etf_backtest_engine - INFO - [26/35] 获取 消费ETF (159928)...
+2026-01-05 20:11:32,105 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:32,606 - backtest.etf_backtest_engine - INFO - [27/35] 获取 医疗ETF (512170)...
+2026-01-05 20:11:34,666 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:35,168 - backtest.etf_backtest_engine - INFO - [28/35] 获取 游戏ETF (159869)...
+2026-01-05 20:11:35,821 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:36,323 - backtest.etf_backtest_engine - INFO - [29/35] 获取 科技ETF (515000)...
+2026-01-05 20:11:37,199 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:37,710 - backtest.etf_backtest_engine - INFO - [30/35] 获取 传媒ETF (512980)...
+2026-01-05 20:11:38,647 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:39,148 - backtest.etf_backtest_engine - INFO - [31/35] 获取 人工智能ETF (159740)...
+2026-01-05 20:11:39,657 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:40,158 - backtest.etf_backtest_engine - INFO - [32/35] 获取 国防ETF (512670)...
+2026-01-05 20:11:40,842 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:41,343 - backtest.etf_backtest_engine - INFO - [33/35] 获取 云计算ETF (516510)...
+2026-01-05 20:11:42,161 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:42,662 - backtest.etf_backtest_engine - INFO - [34/35] 获取 储能ETF (159607)...
+2026-01-05 20:11:43,171 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:43,674 - backtest.etf_backtest_engine - INFO - [35/35] 获取 电力ETF (159611)...
+2026-01-05 20:11:44,429 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:11:44,935 - backtest.etf_backtest_engine - INFO - ETF历史数据获取完成: 25375 条, 35 只ETF
+2026-01-05 20:11:45,151 - backtest.etf_backtest_engine - INFO - ETF历史数据已保存: C:\Users\ian28\Desktop\forecast-block\data\historical\etf_history_3y.csv
+2026-01-05 20:11:45,152 - backtest.etf_backtest_engine - INFO - 开始ETF滚动回测: 2025-01-05 -> 2026-01-05
+2026-01-05 20:11:45,152 - backtest.etf_backtest_engine - INFO - 训练窗口: 24个月
+2026-01-05 20:11:45,152 - backtest.etf_backtest_engine - INFO - 创建ETF特征数据集...
+2026-01-05 20:12:03,353 - backtest.etf_backtest_engine - INFO - ETF特征工程完成: 25340 条数据, 35 只ETF
+2026-01-05 20:12:03,378 - backtest.etf_backtest_engine - INFO - 使用特征: 52 个
+2026-01-05 20:12:03,392 - backtest.etf_backtest_engine - INFO - 测试日期: 241 天
+2026-01-05 20:12:03,843 - backtest.etf_backtest_engine - INFO - [2025-01] 训练完成, 样本: 16695
+2026-01-05 20:12:04,636 - backtest.etf_backtest_engine - INFO - [2025-02] 训练完成, 样本: 16660
+2026-01-05 20:12:05,208 - backtest.etf_backtest_engine - INFO - [2025-03] 训练完成, 样本: 16660
+2026-01-05 20:12:05,793 - backtest.etf_backtest_engine - INFO - [2025-04] 训练完成, 样本: 16695
+2026-01-05 20:12:06,428 - backtest.etf_backtest_engine - INFO - [2025-05] 训练完成, 样本: 16660
+2026-01-05 20:12:07,069 - backtest.etf_backtest_engine - INFO - [2025-06] 训练完成, 样本: 16625
+2026-01-05 20:12:07,662 - backtest.etf_backtest_engine - INFO - [2025-07] 训练完成, 样本: 16695
+2026-01-05 20:12:08,260 - backtest.etf_backtest_engine - INFO - [2025-08] 训练完成, 样本: 16695
+2026-01-05 20:12:08,841 - backtest.etf_backtest_engine - INFO - [2025-09] 训练完成, 样本: 16695
+2026-01-05 20:12:09,420 - backtest.etf_backtest_engine - INFO - [2025-10] 训练完成, 样本: 16695
+2026-01-05 20:12:09,985 - backtest.etf_backtest_engine - INFO - [2025-11] 训练完成, 样本: 16695
+2026-01-05 20:12:10,562 - backtest.etf_backtest_engine - INFO - [2025-12] 训练完成, 样本: 16695
+2026-01-05 20:12:10,809 - backtest.etf_backtest_engine - INFO - 
+============================================================
+2026-01-05 20:12:10,810 - backtest.etf_backtest_engine - INFO - 📊 ETF回测结果评估
+2026-01-05 20:12:10,811 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 20:12:12,357 - backtest.etf_backtest_engine - INFO - 
+📅 统计周期: 2025-01-06 ~ 2025-12-31
+2026-01-05 20:12:12,358 - backtest.etf_backtest_engine - INFO - 📈 总交易天数: 241
+2026-01-05 20:12:12,359 - backtest.etf_backtest_engine - INFO - 🎯 平均命中率: 30.37%
+2026-01-05 20:12:12,359 - backtest.etf_backtest_engine - INFO - 💰 Top5平均日收益: 0.129%
+2026-01-05 20:12:12,361 - backtest.etf_backtest_engine - INFO - 📊 基准平均日收益: 0.145%
+2026-01-05 20:12:12,362 - backtest.etf_backtest_engine - INFO - 💎 平均超额收益: -0.016%
+2026-01-05 20:12:12,363 - backtest.etf_backtest_engine - INFO - 📈 累计超额收益: -3.94%
+2026-01-05 20:12:12,365 - backtest.etf_backtest_engine - INFO - 🏆 超额收益胜率: 115/241 (47.72%)
+2026-01-05 20:12:12,367 - backtest.etf_backtest_engine - INFO - 📉 最大回撤: 15.28%
+2026-01-05 20:12:12,368 - backtest.etf_backtest_engine - INFO - 📊 夏普比率: -0.35
+2026-01-05 20:12:12,369 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 20:12:12,453 - backtest.etf_backtest_engine - INFO - 详细结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_detail_20260105_201212.csv
+2026-01-05 20:12:12,460 - backtest.etf_backtest_engine - INFO - 统计结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_stats_20260105_201212.csv
+2026-01-05 20:12:12,468 - backtest.etf_backtest_engine - INFO - 回测报告已生成: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_report_20260105_201212.md
+2026-01-05 20:12:12,479 - __main__ - INFO - 系统退出
+2026-01-05 20:13:45,674 - __main__ - INFO - ============================================================
+2026-01-05 20:13:45,675 - __main__ - INFO - A股预测系统启动
+2026-01-05 20:13:45,676 - __main__ - INFO - 运行模式: etf-backtest-run
+2026-01-05 20:13:45,676 - __main__ - INFO - ============================================================
+2026-01-05 20:13:45,677 - __main__ - INFO - ============================================================
+2026-01-05 20:13:45,677 - __main__ - INFO - 📊 开始ETF滚动回测（3年数据）...
+2026-01-05 20:13:45,678 - __main__ - INFO - ============================================================
+2026-01-05 20:13:45,681 - __main__ - INFO - 本地无缓存，获取3年ETF历史数据...
+2026-01-05 20:13:45,682 - backtest.etf_backtest_engine - INFO - 获取ETF历史数据: 2023-01-06 ~ 2026-01-05 (3年)
+2026-01-05 20:13:45,683 - backtest.etf_backtest_engine - INFO - [1/35] 获取 沪深300ETF (510300)...
+2026-01-05 20:13:54,371 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:13:54,874 - backtest.etf_backtest_engine - INFO - [2/35] 获取 中证500ETF (510500)...
+2026-01-05 20:13:55,798 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:13:56,299 - backtest.etf_backtest_engine - INFO - [3/35] 获取 创业板ETF (159915)...
+2026-01-05 20:13:57,464 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:13:57,965 - backtest.etf_backtest_engine - INFO - [4/35] 获取 上证50ETF (510050)...
+2026-01-05 20:13:59,882 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:00,383 - backtest.etf_backtest_engine - INFO - [5/35] 获取 科创50ETF (588000)...
+2026-01-05 20:14:01,574 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:02,075 - backtest.etf_backtest_engine - INFO - [6/35] 获取 深证100ETF (159901)...
+2026-01-05 20:14:04,083 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:04,585 - backtest.etf_backtest_engine - INFO - [7/35] 获取 中证1000ETF (512100)...
+2026-01-05 20:14:05,845 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:06,346 - backtest.etf_backtest_engine - INFO - [8/35] 获取 半导体ETF (512480)...
+2026-01-05 20:14:07,603 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:08,104 - backtest.etf_backtest_engine - INFO - [9/35] 获取 新能源车ETF (515030)...
+2026-01-05 20:14:09,257 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:09,761 - backtest.etf_backtest_engine - INFO - [10/35] 获取 白酒ETF (512690)...
+2026-01-05 20:14:10,788 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:11,289 - backtest.etf_backtest_engine - INFO - [11/35] 获取 军工ETF (512660)...
+2026-01-05 20:14:12,347 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:12,849 - backtest.etf_backtest_engine - INFO - [12/35] 获取 医药ETF (512010)...
+2026-01-05 20:14:13,807 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:14,312 - backtest.etf_backtest_engine - INFO - [13/35] 获取 光伏ETF (515790)...
+2026-01-05 20:14:15,197 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:15,698 - backtest.etf_backtest_engine - INFO - [14/35] 获取 银行ETF (512800)...
+2026-01-05 20:14:16,766 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:17,267 - backtest.etf_backtest_engine - INFO - [15/35] 获取 证券ETF (512880)...
+2026-01-05 20:14:18,340 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:18,841 - backtest.etf_backtest_engine - INFO - [16/35] 获取 5GETF (515050)...
+2026-01-05 20:14:20,042 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:20,545 - backtest.etf_backtest_engine - INFO - [17/35] 获取 有色金属ETF (512400)...
+2026-01-05 20:14:21,834 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:22,336 - backtest.etf_backtest_engine - INFO - [18/35] 获取 农业ETF (159825)...
+2026-01-05 20:14:23,270 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:23,772 - backtest.etf_backtest_engine - INFO - [19/35] 获取 房地产ETF (512200)...
+2026-01-05 20:14:24,830 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:25,332 - backtest.etf_backtest_engine - INFO - [20/35] 获取 稀土ETF (516150)...
+2026-01-05 20:14:26,279 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:26,780 - backtest.etf_backtest_engine - INFO - [21/35] 获取 煤炭ETF (515220)...
+2026-01-05 20:14:27,614 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:28,115 - backtest.etf_backtest_engine - INFO - [22/35] 获取 旅游ETF (159766)...
+2026-01-05 20:14:28,681 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:29,182 - backtest.etf_backtest_engine - INFO - [23/35] 获取 环保ETF (512580)...
+2026-01-05 20:14:30,293 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:30,794 - backtest.etf_backtest_engine - INFO - [24/35] 获取 芯片ETF (512760)...
+2026-01-05 20:14:31,498 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:31,999 - backtest.etf_backtest_engine - INFO - [25/35] 获取 计算机ETF (512720)...
+2026-01-05 20:14:33,046 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:33,547 - backtest.etf_backtest_engine - INFO - [26/35] 获取 消费ETF (159928)...
+2026-01-05 20:14:35,015 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:35,516 - backtest.etf_backtest_engine - INFO - [27/35] 获取 医疗ETF (512170)...
+2026-01-05 20:14:36,311 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:36,813 - backtest.etf_backtest_engine - INFO - [28/35] 获取 游戏ETF (159869)...
+2026-01-05 20:14:37,405 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:37,906 - backtest.etf_backtest_engine - INFO - [29/35] 获取 科技ETF (515000)...
+2026-01-05 20:14:39,241 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:39,742 - backtest.etf_backtest_engine - INFO - [30/35] 获取 传媒ETF (512980)...
+2026-01-05 20:14:40,604 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:41,106 - backtest.etf_backtest_engine - INFO - [31/35] 获取 人工智能ETF (159740)...
+2026-01-05 20:14:41,668 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:42,169 - backtest.etf_backtest_engine - INFO - [32/35] 获取 国防ETF (512670)...
+2026-01-05 20:14:42,712 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:43,213 - backtest.etf_backtest_engine - INFO - [33/35] 获取 云计算ETF (516510)...
+2026-01-05 20:14:43,748 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:44,250 - backtest.etf_backtest_engine - INFO - [34/35] 获取 储能ETF (159607)...
+2026-01-05 20:14:45,603 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:46,104 - backtest.etf_backtest_engine - INFO - [35/35] 获取 电力ETF (159611)...
+2026-01-05 20:14:46,626 - backtest.etf_backtest_engine - INFO -    获取 725 条记录
+2026-01-05 20:14:47,133 - backtest.etf_backtest_engine - INFO - ETF历史数据获取完成: 25375 条, 35 只ETF
+2026-01-05 20:14:47,378 - backtest.etf_backtest_engine - INFO - ETF历史数据已保存: C:\Users\ian28\Desktop\forecast-block\data\historical\etf_history_3y.csv
+2026-01-05 20:14:47,380 - backtest.etf_backtest_engine - INFO - 开始ETF滚动回测: 2025-01-05 -> 2026-01-05
+2026-01-05 20:14:47,380 - backtest.etf_backtest_engine - INFO - 训练窗口: 24个月
+2026-01-05 20:14:47,380 - backtest.etf_backtest_engine - INFO - 创建ETF特征数据集...
+2026-01-05 20:15:04,311 - backtest.etf_backtest_engine - INFO - ETF特征工程完成: 25340 条数据, 35 只ETF
+2026-01-05 20:15:04,330 - backtest.etf_backtest_engine - INFO - 使用特征: 52 个
+2026-01-05 20:15:04,347 - backtest.etf_backtest_engine - INFO - 测试日期: 241 天
+2026-01-05 20:15:06,311 - backtest.etf_backtest_engine - INFO - [2025-01] 训练完成, 样本: 16695
+2026-01-05 20:15:08,546 - backtest.etf_backtest_engine - INFO - [2025-02] 训练完成, 样本: 16660
+2026-01-05 20:15:09,705 - backtest.etf_backtest_engine - INFO - [2025-03] 训练完成, 样本: 16660
+2026-01-05 20:15:10,991 - backtest.etf_backtest_engine - INFO - [2025-04] 训练完成, 样本: 16695
+2026-01-05 20:15:12,600 - backtest.etf_backtest_engine - INFO - [2025-05] 训练完成, 样本: 16660
+2026-01-05 20:15:14,687 - backtest.etf_backtest_engine - INFO - [2025-06] 训练完成, 样本: 16625
+2026-01-05 20:15:16,169 - backtest.etf_backtest_engine - INFO - [2025-07] 训练完成, 样本: 16695
+2026-01-05 20:15:17,543 - backtest.etf_backtest_engine - INFO - [2025-08] 训练完成, 样本: 16695
+2026-01-05 20:15:18,737 - backtest.etf_backtest_engine - INFO - [2025-09] 训练完成, 样本: 16695
+2026-01-05 20:15:20,192 - backtest.etf_backtest_engine - INFO - [2025-10] 训练完成, 样本: 16695
+2026-01-05 20:15:21,611 - backtest.etf_backtest_engine - INFO - [2025-11] 训练完成, 样本: 16695
+2026-01-05 20:15:23,028 - backtest.etf_backtest_engine - INFO - [2025-12] 训练完成, 样本: 16695
+2026-01-05 20:15:23,285 - backtest.etf_backtest_engine - INFO - 
+============================================================
+2026-01-05 20:15:23,286 - backtest.etf_backtest_engine - INFO - 📊 ETF回测结果评估
+2026-01-05 20:15:23,286 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 20:15:24,218 - backtest.etf_backtest_engine - INFO - 
+📅 统计周期: 2025-01-06 ~ 2025-12-31
+2026-01-05 20:15:24,220 - backtest.etf_backtest_engine - INFO - 📈 总交易天数: 241
+2026-01-05 20:15:24,221 - backtest.etf_backtest_engine - INFO - 🎯 平均命中率: 32.12%
+2026-01-05 20:15:24,221 - backtest.etf_backtest_engine - INFO - 💰 Top5平均日收益: 0.139%
+2026-01-05 20:15:24,222 - backtest.etf_backtest_engine - INFO - 📊 基准平均日收益: 0.145%
+2026-01-05 20:15:24,222 - backtest.etf_backtest_engine - INFO - 💎 平均超额收益: -0.006%
+2026-01-05 20:15:24,223 - backtest.etf_backtest_engine - INFO - 📈 累计超额收益: -1.50%
+2026-01-05 20:15:24,224 - backtest.etf_backtest_engine - INFO - 🏆 超额收益胜率: 103/241 (42.74%)
+2026-01-05 20:15:24,225 - backtest.etf_backtest_engine - INFO - 📉 最大回撤: 21.07%
+2026-01-05 20:15:24,226 - backtest.etf_backtest_engine - INFO - 📊 夏普比率: -0.11
+2026-01-05 20:15:24,226 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 20:15:24,302 - backtest.etf_backtest_engine - INFO - 详细结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_detail_20260105_201524.csv
+2026-01-05 20:15:24,307 - backtest.etf_backtest_engine - INFO - 统计结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_stats_20260105_201524.csv
+2026-01-05 20:15:24,308 - backtest.etf_backtest_engine - INFO - 回测报告已生成: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_report_20260105_201524.md
+2026-01-05 20:15:24,319 - __main__ - INFO - 系统退出
+2026-01-05 20:16:16,748 - __main__ - INFO - ============================================================
+2026-01-05 20:16:16,749 - __main__ - INFO - A股预测系统启动
+2026-01-05 20:16:16,750 - __main__ - INFO - 运行模式: etf-backtest-run
+2026-01-05 20:16:16,750 - __main__ - INFO - ============================================================
+2026-01-05 20:16:16,751 - __main__ - INFO - ============================================================
+2026-01-05 20:16:16,751 - __main__ - INFO - 📊 开始ETF滚动回测（3年数据）...
+2026-01-05 20:16:16,753 - __main__ - INFO - ============================================================
+2026-01-05 20:16:16,915 - backtest.etf_backtest_engine - INFO - ETF历史数据已加载: 25375 条
+2026-01-05 20:16:16,916 - __main__ - INFO - 使用本地缓存数据: 25375 条
+2026-01-05 20:16:16,917 - backtest.etf_backtest_engine - INFO - 开始ETF滚动回测: 2025-01-05 -> 2026-01-05
+2026-01-05 20:16:16,918 - backtest.etf_backtest_engine - INFO - 训练窗口: 24个月
+2026-01-05 20:16:16,919 - backtest.etf_backtest_engine - INFO - 创建ETF特征数据集...
+2026-01-05 20:16:41,030 - backtest.etf_backtest_engine - INFO - ETF特征工程完成: 25340 条数据, 35 只ETF
+2026-01-05 20:16:41,049 - backtest.etf_backtest_engine - INFO - 使用特征: 52 个
+2026-01-05 20:16:41,065 - backtest.etf_backtest_engine - INFO - 测试日期: 241 天
+2026-01-05 20:16:43,081 - backtest.etf_backtest_engine - INFO - [2025-01] 训练完成, 样本: 16695
+2026-01-05 20:16:45,217 - backtest.etf_backtest_engine - INFO - [2025-02] 训练完成, 样本: 16660
+2026-01-05 20:16:46,644 - backtest.etf_backtest_engine - INFO - [2025-03] 训练完成, 样本: 16660
+2026-01-05 20:16:47,864 - backtest.etf_backtest_engine - INFO - [2025-04] 训练完成, 样本: 16695
+2026-01-05 20:16:49,398 - backtest.etf_backtest_engine - INFO - [2025-05] 训练完成, 样本: 16660
+2026-01-05 20:16:51,390 - backtest.etf_backtest_engine - INFO - [2025-06] 训练完成, 样本: 16625
+2026-01-05 20:16:52,882 - backtest.etf_backtest_engine - INFO - [2025-07] 训练完成, 样本: 16695
+2026-01-05 20:16:54,543 - backtest.etf_backtest_engine - INFO - [2025-08] 训练完成, 样本: 16695
+2026-01-05 20:16:56,030 - backtest.etf_backtest_engine - INFO - [2025-09] 训练完成, 样本: 16695
+2026-01-05 20:16:57,564 - backtest.etf_backtest_engine - INFO - [2025-10] 训练完成, 样本: 16695
+2026-01-05 20:16:59,207 - backtest.etf_backtest_engine - INFO - [2025-11] 训练完成, 样本: 16695
+2026-01-05 20:17:00,609 - backtest.etf_backtest_engine - INFO - [2025-12] 训练完成, 样本: 16695
+2026-01-05 20:17:00,852 - backtest.etf_backtest_engine - INFO - 
+============================================================
+2026-01-05 20:17:00,852 - backtest.etf_backtest_engine - INFO - 📊 ETF回测结果评估
+2026-01-05 20:17:00,853 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 20:17:01,844 - backtest.etf_backtest_engine - INFO - 
+📅 统计周期: 2025-01-06 ~ 2025-12-31
+2026-01-05 20:17:01,845 - backtest.etf_backtest_engine - INFO - 📈 总交易天数: 241
+2026-01-05 20:17:01,845 - backtest.etf_backtest_engine - INFO - 🎯 平均命中率: 30.54%
+2026-01-05 20:17:01,846 - backtest.etf_backtest_engine - INFO - 💰 Top5平均日收益: 0.143%
+2026-01-05 20:17:01,847 - backtest.etf_backtest_engine - INFO - 📊 基准平均日收益: 0.145%
+2026-01-05 20:17:01,847 - backtest.etf_backtest_engine - INFO - 💎 平均超额收益: -0.002%
+2026-01-05 20:17:01,848 - backtest.etf_backtest_engine - INFO - 📈 累计超额收益: -0.58%
+2026-01-05 20:17:01,849 - backtest.etf_backtest_engine - INFO - 🏆 超额收益胜率: 99/241 (41.08%)
+2026-01-05 20:17:01,850 - backtest.etf_backtest_engine - INFO - 📉 最大回撤: 19.10%
+2026-01-05 20:17:01,850 - backtest.etf_backtest_engine - INFO - 📊 夏普比率: -0.04
+2026-01-05 20:17:01,851 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 20:17:01,961 - backtest.etf_backtest_engine - INFO - 详细结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_detail_20260105_201701.csv
+2026-01-05 20:17:01,965 - backtest.etf_backtest_engine - INFO - 统计结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_stats_20260105_201701.csv
+2026-01-05 20:17:01,968 - backtest.etf_backtest_engine - INFO - 回测报告已生成: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_report_20260105_201701.md
+2026-01-05 20:17:01,981 - __main__ - INFO - 系统退出
+2026-01-05 20:20:24,183 - __main__ - INFO - ============================================================
+2026-01-05 20:20:24,184 - __main__ - INFO - A股预测系统启动
+2026-01-05 20:20:24,184 - __main__ - INFO - 运行模式: etf-backtest-run
+2026-01-05 20:20:24,185 - __main__ - INFO - ============================================================
+2026-01-05 20:20:24,185 - __main__ - INFO - ============================================================
+2026-01-05 20:20:24,186 - __main__ - INFO - 📊 开始ETF滚动回测（3年数据）...
+2026-01-05 20:20:24,186 - __main__ - INFO - ============================================================
+2026-01-05 20:20:24,296 - backtest.etf_backtest_engine - INFO - ETF历史数据已加载: 25375 条
+2026-01-05 20:20:24,297 - __main__ - INFO - 使用本地缓存数据: 25375 条
+2026-01-05 20:20:24,298 - backtest.etf_backtest_engine - INFO - 开始ETF滚动回测: 2025-01-05 -> 2026-01-05
+2026-01-05 20:20:24,298 - backtest.etf_backtest_engine - INFO - 训练窗口: 24个月
+2026-01-05 20:20:24,299 - backtest.etf_backtest_engine - INFO - 创建ETF特征数据集...
+2026-01-05 20:20:49,034 - backtest.etf_backtest_engine - INFO - ETF特征工程完成: 25340 条数据, 35 只ETF
+2026-01-05 20:20:49,055 - backtest.etf_backtest_engine - INFO - 使用特征: 52 个
+2026-01-05 20:20:49,070 - backtest.etf_backtest_engine - INFO - 测试日期: 241 天
+2026-01-05 20:20:50,972 - backtest.etf_backtest_engine - INFO - [2025-01] 训练完成, 样本: 16695
+2026-01-05 20:20:52,932 - backtest.etf_backtest_engine - INFO - [2025-02] 训练完成, 样本: 16660
+2026-01-05 20:20:54,922 - backtest.etf_backtest_engine - INFO - [2025-03] 训练完成, 样本: 16660
+2026-01-05 20:20:57,029 - backtest.etf_backtest_engine - INFO - [2025-04] 训练完成, 样本: 16695
+2026-01-05 20:20:59,504 - backtest.etf_backtest_engine - INFO - [2025-05] 训练完成, 样本: 16660
+2026-01-05 20:21:01,208 - backtest.etf_backtest_engine - INFO - [2025-06] 训练完成, 样本: 16625
+2026-01-05 20:21:02,469 - backtest.etf_backtest_engine - INFO - [2025-07] 训练完成, 样本: 16695
+2026-01-05 20:21:03,987 - backtest.etf_backtest_engine - INFO - [2025-08] 训练完成, 样本: 16695
+2026-01-05 20:21:05,418 - backtest.etf_backtest_engine - INFO - [2025-09] 训练完成, 样本: 16695
+2026-01-05 20:21:07,542 - backtest.etf_backtest_engine - INFO - [2025-10] 训练完成, 样本: 16695
+2026-01-05 20:21:09,530 - backtest.etf_backtest_engine - INFO - [2025-11] 训练完成, 样本: 16695
+2026-01-05 20:21:10,831 - backtest.etf_backtest_engine - INFO - [2025-12] 训练完成, 样本: 16695
+2026-01-05 20:21:11,066 - backtest.etf_backtest_engine - INFO - 
+============================================================
+2026-01-05 20:21:11,067 - backtest.etf_backtest_engine - INFO - 📊 ETF回测结果评估
+2026-01-05 20:21:11,067 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 20:21:12,109 - backtest.etf_backtest_engine - INFO - 
+📅 统计周期: 2025-01-06 ~ 2025-12-31
+2026-01-05 20:21:12,110 - backtest.etf_backtest_engine - INFO - 📈 总交易天数: 241
+2026-01-05 20:21:12,110 - backtest.etf_backtest_engine - INFO - 🎯 平均命中率: 32.28%
+2026-01-05 20:21:12,111 - backtest.etf_backtest_engine - INFO - 💰 Top5平均日收益: 0.170%
+2026-01-05 20:21:12,112 - backtest.etf_backtest_engine - INFO - 📊 基准平均日收益: 0.145%
+2026-01-05 20:21:12,112 - backtest.etf_backtest_engine - INFO - 💎 平均超额收益: 0.025%
+2026-01-05 20:21:12,113 - backtest.etf_backtest_engine - INFO - 📈 累计超额收益: 5.93%
+2026-01-05 20:21:12,113 - backtest.etf_backtest_engine - INFO - 🏆 超额收益胜率: 113/241 (46.89%)
+2026-01-05 20:21:12,114 - backtest.etf_backtest_engine - INFO - 📉 最大回撤: 15.52%
+2026-01-05 20:21:12,114 - backtest.etf_backtest_engine - INFO - 📊 夏普比率: 0.38
+2026-01-05 20:21:12,115 - backtest.etf_backtest_engine - INFO - ============================================================
+2026-01-05 20:21:12,226 - backtest.etf_backtest_engine - INFO - 详细结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_detail_20260105_202112.csv
+2026-01-05 20:21:12,230 - backtest.etf_backtest_engine - INFO - 统计结果已保存: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_stats_20260105_202112.csv
+2026-01-05 20:21:12,233 - backtest.etf_backtest_engine - INFO - 回测报告已生成: C:\Users\ian28\Desktop\forecast-block\data\backtest_results\etf_backtest_report_20260105_202112.md
+2026-01-05 20:21:12,244 - __main__ - INFO - 系统退出
+2026-01-05 20:53:49,152 - __main__ - INFO - ============================================================
+2026-01-05 20:53:49,152 - __main__ - INFO - A股预测系统启动
+2026-01-05 20:53:49,153 - __main__ - INFO - 运行模式: etf-predict
+2026-01-05 20:53:49,155 - __main__ - INFO - ============================================================
+2026-01-05 20:53:49,162 - data.etf_data_processor - INFO - ETF数据库表初始化完成
+2026-01-05 20:53:49,162 - __main__ - INFO - ==================================================
+2026-01-05 20:53:49,163 - __main__ - INFO - 开始生成今日ETF预测...
+2026-01-05 20:53:49,203 - data.etf_data_processor - INFO - 加载 1435 条历史ETF数据
+2026-01-05 20:53:50,874 - data.etf_data_processor - INFO - 计算完成 1435 条ETF特征数据
+2026-01-05 20:53:50,877 - __main__ - INFO - 使用 2026-01-05 ETF数据进行预测
+2026-01-05 20:53:50,882 - models.etf_predictor - INFO - ETF模型已加载: C:\Users\ian28\Desktop\forecast-block\models\saved\etf_predict_model.pkl
+2026-01-05 20:53:50,890 - models.etf_predictor - INFO - ETF预测完成，Top-5: ['有色金属ETF', '环保ETF', '人工智能ETF', '光伏ETF', '稀土ETF']
+2026-01-05 20:53:50,897 - __main__ - INFO - 已记录 5 条ETF预测
+2026-01-05 20:53:50,899 - __main__ - INFO - ETF预测报告已生成: C:\Users\ian28\Desktop\forecast-block\reports\etf_prediction_report_2026-01-05.md
+2026-01-05 20:53:50,904 - __main__ - INFO - 系统退出

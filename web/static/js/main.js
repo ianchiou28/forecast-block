@@ -78,34 +78,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateBacktest(data) {
         if (data.status !== 'success') {
-            document.getElementById('perf-hit-rate').textContent = '暂无数据';
-            document.getElementById('perf-avg-return').textContent = '--';
+            document.getElementById('perf-win-rate').textContent = '暂无数据';
+            document.getElementById('perf-beat-market').textContent = '--';
             document.getElementById('perf-total-return').textContent = '--';
-            document.getElementById('perf-limit-up').textContent = '--';
+            document.getElementById('perf-sharpe').textContent = '--';
             document.getElementById('history-tbody').innerHTML = 
-                '<tr><td colspan="6" style="text-align:center;color:#888;">暂无回测数据</td></tr>';
+                '<tr><td colspan="5" style="text-align:center;color:#888;">暂无回测数据</td></tr>';
             return;
         }
 
         const perf = data.performance;
         
-        // Update performance cards
-        document.getElementById('perf-hit-rate').textContent = `${perf.overall_hit_rate}%`;
-        document.getElementById('perf-avg-return').textContent = `${perf.avg_daily_return}%`;
+        // Update performance cards (新的板块指标)
+        document.getElementById('perf-win-rate').textContent = `${perf.win_rate || perf.overall_hit_rate || '--'}%`;
+        document.getElementById('perf-beat-market').textContent = `${perf.beat_market_rate || '--'}%`;
         document.getElementById('perf-total-return').textContent = `${perf.total_return}%`;
-        document.getElementById('perf-limit-up').textContent = perf.total_limit_up;
+        document.getElementById('perf-sharpe').textContent = perf.sharpe_ratio || '--';
 
-        // Update rank hit rate bars
-        const top1 = perf.top1_hit_rate || 0;
-        const top3 = perf.top3_hit_rate || 0;
-        const top5 = perf.top5_hit_rate || 0;
+        // Update hit rate bars (涨幅命中率)
+        const hit1 = perf.hit_1pct || perf.top1_hit_rate || 0;
+        const hit2 = perf.hit_2pct || perf.top3_hit_rate || 0;
+        const hit3 = perf.hit_3pct || perf.top5_hit_rate || 0;
 
-        document.getElementById('bar-top1').style.width = `${top1}%`;
-        document.getElementById('rate-top1').textContent = `${top1}%`;
-        document.getElementById('bar-top3').style.width = `${top3}%`;
-        document.getElementById('rate-top3').textContent = `${top3}%`;
-        document.getElementById('bar-top5').style.width = `${top5}%`;
-        document.getElementById('rate-top5').textContent = `${top5}%`;
+        document.getElementById('bar-hit1').style.width = `${hit1}%`;
+        document.getElementById('rate-hit1').textContent = `${hit1}%`;
+        document.getElementById('bar-hit2').style.width = `${hit2}%`;
+        document.getElementById('rate-hit2').textContent = `${hit2}%`;
+        document.getElementById('bar-hit3').style.width = `${hit3}%`;
+        document.getElementById('rate-hit3').textContent = `${hit3}%`;
 
         // Update history table
         const tbody = document.getElementById('history-tbody');
@@ -122,13 +122,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <td><strong>${row.sector_name}</strong></td>
                     <td>#${row.predict_rank}</td>
                     <td class="${changeClass}">${row.actual_change_pct !== null ? row.actual_change_pct + '%' : '--'}</td>
-                    <td>${row.actual_limit_up}</td>
                     <td>${hitIcon}</td>
                 `;
                 tbody.appendChild(tr);
             });
         } else {
-            tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:#888;">暂无历史记录</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="5" style="text-align:center;color:#888;">暂无历史记录</td></tr>';
         }
     }
 });

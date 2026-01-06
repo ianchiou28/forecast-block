@@ -128,7 +128,19 @@ def get_dashboard_data(date_str):
 
 
 def get_backtest_data(days: int = 30):
-    """获取回测数据"""
+    """获取回测数据（优先从历史回测结果读取）"""
+    
+    # 1. 首先尝试读取历史回测结果
+    backtest_results_dir = DATA_DIR / "backtest_results"
+    if backtest_results_dir.exists():
+        # 查找最新的回测报告
+        report_files = list(backtest_results_dir.glob("backtest_report_*.md"))
+        parquet_files = list(backtest_results_dir.glob("backtest_*.parquet"))
+        
+        if report_files or parquet_files:
+            return get_historical_backtest_data(backtest_results_dir)
+    
+    # 2. 回退到实时回测数据库
     db_path = DATA_DIR / "backtest.db"
     
     if not db_path.exists():
@@ -228,6 +240,115 @@ def get_backtest_data(days: int = 30):
         return {
             "status": "error",
             "message": str(e),
+            "performance": {},
+            "history": []
+        }
+
+
+def get_historical_backtest_data(results_dir: Path):
+    """从历史回测结果读取数据"""
+    try:
+        # 读取最新的parquet文件
+        parquet_files = sorted(results_dir.glob("backtest_*.parquet"), 
+                               key=lambda x: x.stat().st_mtime, reverse=True)
+        
+        if not parquet_files:
+            return {
+                "status": "no_data",
+                "message": "没有找到回测结果文件",
+                "performance": {},
+                "history": []
+            }
+        
+        df = pd.read_parquet(parquet_files[0])
+        
+        # 计算绩效指标
+        total_days = df['date'].nunique()
+        
+        # 按日期分组计算每日指标
+        daily_stats = df.groupby('date').apply(
+            lambda x: pd.Series({
+                'avg_return': x.nsmallest(5, 'pred_rank')['label_change_pct'].mean(),
+                'market_return': x['label_change_pct'].mean(),
+                'top5_in_top20pct': (x.nsmallest(5, 'pred_rank')['label_change_pct'].rank(pct=True, ascending=False) <= 0.2).mean(),
+            })
+        ).reset_index()
+        
+        daily_stats['excess_return'] = daily_stats['avg_return'] - daily_stats['market_return']
+        
+        # 整体指标
+        win_days = (daily_stats['avg_return'] > 0).sum()
+        beat_market_days = (daily_stats['excess_return'] > 0).sum()
+        
+        performance = {
+            "total_days": int(total_days),
+            "win_days": int(win_days),
+            "beat_market_days": int(beat_market_days),
+            "win_rate": round(win_days / total_days * 100, 2) if total_days > 0 else 0,
+            "beat_market_rate": round(beat_market_days / total_days * 100, 2) if total_days > 0 else 0,
+            "avg_daily_return": round(daily_stats['avg_return'].mean(), 2),
+            "total_return": round(daily_stats['avg_return'].sum(), 2),
+            "avg_excess_return": round(daily_stats['excess_return'].mean(), 2),
+            "total_excess_return": round(daily_stats['excess_return'].sum(), 2),
+            # 涨幅命中率
+            "hit_1pct": round((df.groupby('date').apply(
+                lambda x: (x.nsmallest(5, 'pred_rank')['label_change_pct'] > 1).mean()
+            ).mean() * 100), 2),
+            "hit_2pct": round((df.groupby('date').apply(
+                lambda x: (x.nsmallest(5, 'pred_rank')['label_change_pct'] > 2).mean()
+            ).mean() * 100), 2),
+            "hit_3pct": round((df.groupby('date').apply(
+                lambda x: (x.nsmallest(5, 'pred_rank')['label_change_pct'] > 3).mean()
+            ).mean() * 100), 2),
+            # Top20%命中率
+            "top20_hit_rate": round(daily_stats['top5_in_top20pct'].mean() * 100, 2),
+        }
+        
+        # 计算风险指标
+        daily_returns = daily_stats['avg_return']
+        if daily_returns.std() > 0:
+            performance["sharpe_ratio"] = round(
+                daily_returns.mean() / daily_returns.std() * (252 ** 0.5), 2
+            )
+        else:
+            performance["sharpe_ratio"] = 0
+        
+        # 最大回撤
+        cumulative = (1 + daily_returns / 100).cumprod()
+        rolling_max = cumulative.expanding().max()
+        drawdown = (cumulative - rolling_max) / rolling_max
+        performance["max_drawdown"] = round(drawdown.min() * 100, 2)
+        
+        # 提取部分历史记录
+        history = []
+        recent_dates = sorted(df['date'].unique())[-10:]  # 最近10天
+        
+        for date in recent_dates:
+            day_df = df[df['date'] == date].nsmallest(5, 'pred_rank')
+            for _, row in day_df.iterrows():
+                history.append({
+                    "predict_date": row['date'],
+                    "sector_name": row['sector_name'],
+                    "predict_rank": int(row['pred_rank']),
+                    "predict_score": round(row['pred_score'], 4) if pd.notna(row['pred_score']) else 0,
+                    "actual_change_pct": round(row['label_change_pct'], 2) if pd.notna(row['label_change_pct']) else None,
+                    "is_hit": row['label_change_pct'] > 1 if pd.notna(row['label_change_pct']) else None
+                })
+        
+        return {
+            "status": "success",
+            "source": "historical_backtest",
+            "file": parquet_files[0].name,
+            "performance": performance,
+            "history": history
+        }
+        
+    except Exception as e:
+        import traceback
+        return {
+            "status": "error",
+            "message": str(e),
+            "traceback": traceback.format_exc(),
             "performance": {},
             "history": []
         }
