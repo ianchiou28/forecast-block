@@ -579,13 +579,15 @@ def main():
         "--mode", 
         choices=["predict", "train", "fetch", "full", "daemon", "backtest", "report",
                  "etf-predict", "etf-train", "etf-fetch", "etf-full", "etf-backtest", 
-                 "etf-backtest-run", "etf-report", "all-predict"],
+                 "etf-backtest-run", "etf-report", "all-predict",
+                 "etf-reward-train", "etf-reward-predict", "etf-reward-backtest"],
         default="predict",
         help="运行模式: predict(板块预测), train(板块训练), fetch(获取板块数据), full(板块完整流程), "
              "daemon(守护进程), backtest(回测统计), report(生成回测报告), "
              "etf-predict(ETF预测), etf-train(ETF训练), etf-fetch(获取ETF数据), etf-full(ETF完整流程), "
              "etf-backtest(ETF回测统计), etf-backtest-run(运行3年ETF滚动回测), etf-report(ETF回测报告), "
-             "all-predict(同时预测板块和ETF)"
+             "etf-reward-train(奖惩机制训练), etf-reward-predict(奖惩机制预测), "
+             "etf-reward-backtest(奖惩机制2024回测), all-predict(同时预测板块和ETF)"
     )
     parser.add_argument(
         "--force-train",
@@ -705,6 +707,113 @@ def main():
                 print("\n📋 近期ETF预测记录:")
                 print(history[['predict_date', 'etf_code', 'etf_name', 
                               'predict_rank', 'actual_change_pct', 'is_hit']].to_string(index=False))
+        
+        elif args.mode == "etf-reward-backtest":
+            # 奖惩机制2024年回测
+            logger.info("=" * 60)
+            logger.info("🎯 开始奖惩机制深度学习回测...")
+            logger.info("   训练期: 2023-2024 (滚动)")
+            logger.info("   回测期: 2025全年")
+            logger.info("=" * 60)
+            
+            from models.etf_reward_predictor import RewardRollingBacktest
+            from backtest.etf_backtest_engine import ETFFeatureEngineer as ETFBacktestFE
+            
+            # 获取历史数据
+            fetcher = ETFHistoricalDataFetcher()
+            df_history = fetcher.load_history_data()
+            
+            if df_history.empty:
+                logger.info("本地无缓存，获取4年ETF历史数据...")
+                df_history = fetcher.fetch_all_etf_history(years=4)
+                if not df_history.empty:
+                    fetcher.save_history_data(df_history)
+            
+            if df_history.empty:
+                logger.error("无法获取历史数据!")
+            else:
+                # 计算特征
+                feature_eng = ETFBacktestFE()
+                df_features = feature_eng.create_features(df_history)
+                
+                # 运行回测
+                backtest = RewardRollingBacktest(
+                    train_window_months=args.train_months,
+                    retrain_interval_months=1,
+                    top_k=5,
+                    reward_weight=0.5,
+                    penalty_weight=0.8
+                )
+                
+                report = backtest.run_backtest(
+                    df_features,
+                    train_start="2023-01-01",
+                    train_end="2024-12-31",
+                    test_start="2025-01-01",
+                    test_end="2025-12-31"
+                )
+                
+                if report.get("status") == "success":
+                    backtest.print_report(report)
+                else:
+                    print(f"\n❌ 回测失败: {report.get('message', 'unknown')}")
+        
+        elif args.mode == "etf-reward-train":
+            # 奖惩机制模型训练
+            logger.info("=" * 60)
+            logger.info("🎯 奖惩机制模型训练...")
+            logger.info("=" * 60)
+            
+            from models.etf_reward_predictor import ETFRewardModel
+            from backtest.etf_backtest_engine import ETFFeatureEngineer as ETFBacktestFE
+            
+            fetcher = ETFHistoricalDataFetcher()
+            df_history = fetcher.load_history_data()
+            
+            if df_history.empty:
+                df_history = fetcher.fetch_all_etf_history(years=3)
+            
+            if not df_history.empty:
+                feature_eng = ETFBacktestFE()
+                df_features = feature_eng.create_features(df_history)
+                
+                model = ETFRewardModel()
+                result = model.train_with_reward(df_features, epochs=100)
+                
+                if result.get("status") == "success":
+                    print(f"\n✅ 奖惩模型训练完成!")
+                    print(f"   MSE: {result.get('mse', 0):.4f}")
+                    print(f"   NDCG@5: {result.get('ndcg@5', 0):.4f}")
+        
+        elif args.mode == "etf-reward-predict":
+            # 奖惩机制模型预测
+            logger.info("=" * 60)
+            logger.info("🎯 奖惩机制模型预测...")
+            logger.info("=" * 60)
+            
+            from models.etf_reward_predictor import ETFRewardModel
+            from backtest.etf_backtest_engine import ETFFeatureEngineer as ETFBacktestFE
+            
+            fetcher = ETFHistoricalDataFetcher()
+            df_history = fetcher.load_history_data()
+            
+            if not df_history.empty:
+                feature_eng = ETFBacktestFE()
+                df_features = feature_eng.create_features(df_history)
+                
+                # 获取最新日期数据
+                latest_date = df_features["date"].max()
+                df_latest = df_features[df_features["date"] == latest_date]
+                
+                model = ETFRewardModel()
+                predictions = model.predict(df_latest, top_k=5)
+                
+                if not predictions.empty:
+                    print(f"\n📊 【奖惩模型ETF预测】{latest_date}")
+                    print("=" * 50)
+                    for _, row in predictions.iterrows():
+                        print(f"{row['rank']}. {row['etf_name']}({row['etf_code']}) - 得分: {row['pred_score']:.4f}")
+                    print("=" * 50)
         
         else:
             # ETF预测系统
