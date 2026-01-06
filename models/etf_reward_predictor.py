@@ -647,6 +647,9 @@ class RewardRollingBacktest:
         if results_df.empty:
             return {"status": "error", "message": "无预测结果"}
         
+        # 初始本金
+        INITIAL_CAPITAL = 10000.0
+        
         # 基础统计
         total_predictions = len(results_df)
         total_positive = results_df["is_positive"].sum()
@@ -661,16 +664,23 @@ class RewardRollingBacktest:
         
         # 收益统计
         avg_return = results_df["actual_return"].mean()
-        total_return = results_df.groupby("date")["actual_return"].mean().sum()
         
-        # Top-1策略收益（每天买入Top-1）
+        # Top-1策略收益（每天买入Top-1，用本金复利计算）
         top1_daily_returns = top1_results.groupby("date")["actual_return"].mean()
-        top1_total_return = top1_daily_returns.sum()
+        top1_capital = INITIAL_CAPITAL
+        for ret in top1_daily_returns:
+            top1_capital *= (1 + ret / 100)
+        top1_final_capital = top1_capital
+        top1_total_return = ((top1_final_capital - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100
         top1_sharpe = (top1_daily_returns.mean() / top1_daily_returns.std() * np.sqrt(252)) if top1_daily_returns.std() > 0 else 0
         
-        # Top-5等权策略
+        # Top-5等权策略（用本金复利计算）
         top5_daily_returns = results_df.groupby("date")["actual_return"].mean()
-        top5_total_return = top5_daily_returns.sum()
+        top5_capital = INITIAL_CAPITAL
+        for ret in top5_daily_returns:
+            top5_capital *= (1 + ret / 100)
+        top5_final_capital = top5_capital
+        top5_total_return = ((top5_final_capital - INITIAL_CAPITAL) / INITIAL_CAPITAL) * 100
         top5_sharpe = (top5_daily_returns.mean() / top5_daily_returns.std() * np.sqrt(252)) if top5_daily_returns.std() > 0 else 0
         
         # 最大回撤
@@ -697,12 +707,17 @@ class RewardRollingBacktest:
             "total_days": total_days,
             "total_predictions": total_predictions,
             
+            # 本金信息
+            "initial_capital": INITIAL_CAPITAL,
+            "top1_final_capital": top1_final_capital,
+            "top5_final_capital": top5_final_capital,
+            
             # 命中率
             "overall_hit_rate": hit_rate,
             "top1_hit_rate": top1_hit_rate,
             "top3_hit_rate": top3_hit_rate,
             
-            # 收益
+            # 收益（年化）
             "avg_daily_return": avg_return,
             "top1_total_return": top1_total_return,
             "top5_total_return": top5_total_return,
@@ -743,6 +758,7 @@ class RewardRollingBacktest:
 | 回测期间 | {report.get('period', 'N/A')} |
 | 交易天数 | {report.get('total_days', 0)} |
 | 总预测次数 | {report.get('total_predictions', 0)} |
+| 初始本金 | ¥{report.get('initial_capital', 10000):.2f} |
 
 ---
 
@@ -756,12 +772,12 @@ class RewardRollingBacktest:
 
 ---
 
-## 💰 收益统计
+## 💰 收益统计（本金 ¥10,000）
 
-| 策略 | 累计收益 | 夏普比率 |
-|------|----------|----------|
-| Top-1策略 | {report.get('top1_total_return', 0):.2f}% | {report.get('top1_sharpe', 0):.2f} |
-| Top-5等权 | {report.get('top5_total_return', 0):.2f}% | {report.get('top5_sharpe', 0):.2f} |
+| 策略 | 最终资金 | 年化收益率 | 夏普比率 |
+|------|----------|------------|----------|
+| Top-1策略 | ¥{report.get('top1_final_capital', 10000):.2f} | {report.get('top1_total_return', 0):.2f}% | {report.get('top1_sharpe', 0):.2f} |
+| Top-5等权 | ¥{report.get('top5_final_capital', 10000):.2f} | {report.get('top5_total_return', 0):.2f}% | {report.get('top5_sharpe', 0):.2f} |
 
 ---
 
@@ -814,15 +830,18 @@ class RewardRollingBacktest:
         print(f"\n📊 回测期间: {report.get('period', 'N/A')}")
         print(f"   交易天数: {report.get('total_days', 0)}")
         print(f"   总预测数: {report.get('total_predictions', 0)}")
+        print(f"   初始本金: ¥{report.get('initial_capital', 10000):.2f}")
         
         print(f"\n🎯 命中率:")
         print(f"   Top-1 命中率: {report.get('top1_hit_rate', 0):.2%}")
         print(f"   Top-3 命中率: {report.get('top3_hit_rate', 0):.2%}")
         print(f"   整体命中率:   {report.get('overall_hit_rate', 0):.2%}")
         
-        print(f"\n💰 收益统计:")
-        print(f"   Top-1策略累计收益: {report.get('top1_total_return', 0):.2f}%")
-        print(f"   Top-5等权累计收益: {report.get('top5_total_return', 0):.2f}%")
+        print(f"\n💰 收益统计（本金 ¥10,000）:")
+        print(f"   Top-1策略最终资金: ¥{report.get('top1_final_capital', 10000):.2f}")
+        print(f"   Top-1策略年化收益: {report.get('top1_total_return', 0):.2f}%")
+        print(f"   Top-5等权最终资金: ¥{report.get('top5_final_capital', 10000):.2f}")
+        print(f"   Top-5等权年化收益: {report.get('top5_total_return', 0):.2f}%")
         print(f"   平均日收益: {report.get('avg_daily_return', 0):.4f}%")
         
         print(f"\n📈 风险指标:")

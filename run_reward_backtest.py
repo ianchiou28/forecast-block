@@ -71,7 +71,7 @@ def compute_features(df: pd.DataFrame) -> pd.DataFrame:
     logger.info("🔧 计算技术特征...")
     
     feature_engineer = ETFFeatureEngineer()
-    df_features = feature_engineer.compute_features(df)
+    df_features = feature_engineer.create_features(df)
     
     logger.info(f"   特征计算完成: {len(df_features)} 条")
     return df_features
@@ -84,8 +84,8 @@ def run_backtest():
     print("🚀 ETF奖惩机制深度学习回测系统")
     print("=" * 70)
     print("\n📋 回测配置:")
-    print("   • 训练数据: 2022-01-01 ~ 2023-12-31 (滚动窗口)")
-    print("   • 回测数据: 2024-01-01 ~ 2024-12-31")
+    print("   • 训练数据: 2023-01-01 ~ 2024-12-31 (滚动窗口)")
+    print("   • 回测数据: 2025-01-01 ~ 2025-12-31")
     print("   • 训练窗口: 12个月")
     print("   • 重训练间隔: 每月初")
     print("   • 预测Top-K: 5")
@@ -122,10 +122,10 @@ def run_backtest():
     
     report = backtest.run_backtest(
         df_features,
-        train_start="2022-01-01",
-        train_end="2023-12-31",
-        test_start="2024-01-01",
-        test_end="2024-12-31"
+        train_start="2023-01-01",
+        train_end="2024-12-31",
+        test_start="2025-01-01",
+        test_end="2025-12-31"
     )
     
     # 4. 打印报告
