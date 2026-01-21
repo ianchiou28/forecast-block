@@ -1,0 +1,109 @@
+# Conda environment
+.conda/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv
+.env
+env.bak/
+venv.bak/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Data files (large)
+data/raw/**/*.csv
+data/raw/**/*.json
+data/historical/**/*.csv
+data/historical/**/*.json
+data/historical/**/*.parquet
+data/processed/**/*.csv
+data/processed/**/*.json
+
+# Model files
+models/saved/**/*.pkl
+models/saved/**/*.h5
+models/saved/**/*.joblib
+models/saved/**/*.pth
+
+# Logs
+logs/
+*.log
+
+# Reports (keep git tracking for essential ones, ignore data files)
+reports/**/*.html
+reports/**/*.csv
+
+# Backtest results
+data/backtest_results/**/*.csv
+data/backtest_results/**/*.json
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Environment specific
+.conda/
+conda-env/
+miniconda3/
+anaconda3/
+.condarc
+*.yml.bak
+*.yaml.bak
+
+# Conda environments (all)
+env/
+envs/
+.envs/
+conda-bld/
+pkgs/
+site-packages/
+share/

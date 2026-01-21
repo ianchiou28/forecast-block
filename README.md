@@ -1,255 +1,556 @@
-# A股板块涨停预测系统
+# A股预测系统
 
-> 基于资金流向与机器学习的A股板块涨停预测系统，每日早上8点自动预测当日涨停板块。
+> 基于深度神经网络与资金流向分析的A股板块涨停预测 & ETF涨幅预测系统
 
-## 📊 系统架构
+[![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)](https://www.python.org/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-red.svg)](https://pytorch.org/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+---
+
+## 📋 目录
+
+- [功能特点](#-功能特点)
+- [系统架构](#-系统架构)
+- [快速开始](#-快速开始)
+- [使用指南](#-使用指南)
+- [运行模式详解](#-运行模式详解)
+- [模型说明](#-模型说明)
+- [项目结构](#-项目结构)
+- [配置说明](#-配置说明)
+- [理论基础](#-理论基础)
+- [常见问题](#-常见问题)
+
+**📚 完整理论文档**：[THEORY.md](THEORY.md) - 深度讲解系统原理、两种预测模式、特征工程、风险管理等
+
+---
+
+## ✨ 功能特点
+
+### 🎯 板块涨停预测
+- 基于 LightGBM 的板块涨停潮预测
+- 实时资金流向监控（概念板块、行业板块）
+- 龙虎榜数据分析
+- 北向资金流向追踪
+
+### 📊 ETF 涨幅预测
+- **深度神经网络 (DNN)** 模型预测
+- 支持 GPU 加速 (CUDA)
+- 自动特征工程（19维特征）
+- 早停机制防止过拟合
+- NDCG@5 排名质量评估
+
+### 📈 回测系统
+- 滚动训练回测
+- 多维度绩效评估
+- 自动预测验证
+- 详细回测报告生成
+
+### 🤖 自动化调度
+- 定时数据获取（收盘后）
+- 定时模型训练
+- 定时预测生成（早盘前）
+- 守护进程模式
+
+---
+
+## 🏗 系统架构
 
 ```
-forecast-block/
-├── config/              # 配置模块
-│   ├── __init__.py
-│   └── settings.py      # 系统配置
-├── data/                # 数据模块
-│   ├── __init__.py
-│   ├── data_fetcher.py  # 数据获取（AkShare）
-│   ├── data_processor.py # 数据处理与特征工程
-│   ├── sector_data.db   # 板块数据SQLite
-│   ├── backtest.db      # 回测数据SQLite
-│   ├── raw/             # 原始数据
-│   └── processed/       # 处理后数据
-├── models/              # 模型模块
-│   ├── __init__.py
-│   ├── predictor.py     # LightGBM预测模型
-│   └── saved/           # 保存的模型
-├── backtest/            # 回测模块
-│   ├── __init__.py
-│   └── database.py      # 回测数据库
-├── utils/               # 工具模块
-│   ├── __init__.py
-│   └── report_generator.py # 报告生成
-├── scheduler/           # 调度模块
-│   ├── __init__.py
-│   └── task_scheduler.py # 定时任务
-├── logs/                # 日志目录
-├── reports/             # 报告输出
-├── main.py              # 主入口
-├── test_predict.py      # 快速测试
-├── backtest_tool.py     # 回测工具
-├── environment.yml      # Conda环境配置
-├── install.bat          # Windows安装脚本
-├── install.sh           # Linux/Mac安装脚本
-├── run.bat              # Windows启动脚本
-├── run.sh               # Linux/Mac启动脚本
-└── requirements.txt     # 依赖包
+┌─────────────────────────────────────────────────────────────┐
+│                      A股预测系统                             │
+├─────────────────────────┬───────────────────────────────────┤
+│    板块涨停预测系统       │         ETF涨幅预测系统            │
+│   (SectorPredictSystem) │      (ETFPredictSystem)           │
+├─────────────────────────┼───────────────────────────────────┤
+│    LightGBM 模型         │    深度神经网络 (PyTorch)          │
+│    - 概念板块资金流       │    - 64→32→1 全连接网络           │
+│    - 行业板块资金流       │    - ReLU + Dropout              │
+│    - 龙虎榜数据          │    - 标准化预处理                  │
+│    - 涨停池数据          │    - 早停机制                      │
+├─────────────────────────┴───────────────────────────────────┤
+│                      特征工程层                              │
+│    动量特征 | 成交量特征 | 均线偏离 | RSI | ATR | 资金流      │
+├─────────────────────────────────────────────────────────────┤
+│                      数据获取层                              │
+│              AKShare API → SQLite 数据库                    │
+└─────────────────────────────────────────────────────────────┘
 ```
+
+---
 
 ## 🚀 快速开始
 
-### 1. 环境准备 (推荐 Conda)
+### 环境要求
 
-**方式一：一键安装 (推荐)**
+- Python 3.8+
+- CUDA 11.8+ (可选，GPU加速)
+- Windows / Linux / macOS
 
-```bash
-# Windows - 双击 install.bat 或运行:
-install.bat
+### 安装步骤
 
-# Linux/Mac:
-chmod +x install.sh
-./install.sh
-```
-
-**方式二：手动安装**
+#### 方式一：使用 pip（推荐）
 
 ```bash
-# 使用 conda 创建环境
-conda env create -f environment.yml
+# 克隆仓库
+git clone https://github.com/ianchiou28/forecast-block.git
+cd forecast-block
 
-# 激活环境
-conda activate forecast
-```
-
-**方式三：使用 pip**
-
-```bash
-# 安装Python 3.9+
+# 安装依赖
 pip install -r requirements.txt
 ```
 
-### 2. 运行系统
+#### 方式二：使用 Conda
 
 ```bash
-# 激活 conda 环境
+# 创建环境
+conda env create -f environment.yml
 conda activate forecast
 
-# 首次运行 - 获取数据
-python main.py --mode fetch
+# 或使用快捷脚本
+# Windows
+install.bat
 
-# 运行预测
+# Linux/macOS
+./install.sh
+```
+
+### 首次运行
+
+```bash
+# 1. 获取ETF历史数据（首次需要）
+python main.py --mode etf-fetch --days 60
+
+# 2. 训练模型
+python main.py --mode etf-train
+
+# 3. 生成预测
+python main.py --mode etf-predict
+```
+
+---
+
+## 📖 使用指南
+
+### 基本命令
+
+```bash
+python main.py --mode <模式> [选项]
+```
+
+### 可用模式
+
+| 模式 | 说明 | 示例 |
+|------|------|------|
+| `predict` | 板块涨停预测 | `python main.py --mode predict` |
+| `train` | 训练板块模型 | `python main.py --mode train` |
+| `fetch` | 获取板块数据 | `python main.py --mode fetch` |
+| `full` | 板块完整流程 | `python main.py --mode full` |
+| `daemon` | 守护进程模式 | `python main.py --mode daemon` |
+| `backtest` | 板块回测统计 | `python main.py --mode backtest --days 30` |
+| `report` | 生成板块报告 | `python main.py --mode report` |
+| `etf-predict` | ETF预测 | `python main.py --mode etf-predict` |
+| `etf-train` | 训练ETF模型 | `python main.py --mode etf-train` |
+| `etf-fetch` | 获取ETF数据 | `python main.py --mode etf-fetch --days 60` |
+| `etf-full` | ETF完整流程 | `python main.py --mode etf-full` |
+| `etf-backtest` | ETF回测统计 | `python main.py --mode etf-backtest` |
+| `etf-backtest-run` | 运行ETF滚动回测 | `python main.py --mode etf-backtest-run --years 3` |
+| `etf-report` | 生成ETF报告 | `python main.py --mode etf-report` |
+| `all-predict` | 同时预测板块和ETF | `python main.py --mode all-predict` |
+
+### 常用选项
+
+| 选项 | 说明 | 默认值 |
+|------|------|--------|
+| `--force-train` | 强制重新训练模型 | False |
+| `--days` | 回测天数/历史数据天数 | 30 |
+| `--years` | ETF历史数据年数 | 3 |
+| `--train-months` | 训练窗口（月） | 24 |
+
+---
+
+## 🔧 运行模式详解
+
+### 1️⃣ 板块涨停预测 (`predict`)
+
+基于资金流向和涨停数据预测明日可能出现涨停潮的板块。
+
+```bash
 python main.py --mode predict
 ```
 
-**快捷启动脚本:**
+**输出示例：**
+```
+============================================================
+📈 【A股板块涨停预测】2026年01月06日
 
-**Windows:**
-```batch
-# 双击 run.bat 或命令行执行
-run.bat
+🎯 今日预测涨停板块:
+1. AI智能体 (得分:1.00)
+   └─ 资金持续流入，涨停家数增加
+2. AIGC概念 (得分:0.98)
+   └─ 龙头强势，资金抢筹
+...
+============================================================
 ```
 
-**Linux/Mac:**
+### 2️⃣ ETF预测 (`etf-predict`)
+
+使用深度神经网络预测ETF涨幅排名。
+
 ```bash
-chmod +x run.sh
-./run.sh
+python main.py --mode etf-predict
 ```
 
-### 3. 运行模式
-
-| 模式 | 命令 | 说明 |
-|------|------|------|
-| 预测 | `python main.py --mode predict` | 立即执行一次预测 |
-| 获取数据 | `python main.py --mode fetch` | 获取最新市场数据 |
-| 训练模型 | `python main.py --mode train` | 训练/更新模型 |
-| 完整流程 | `python main.py --mode full` | 数据→训练→预测 |
-| 守护模式 | `python main.py --mode daemon` | 定时自动执行 |
-
-## 📈 功能特性
-
-### 核心功能
-
-1. **数据获取** - 自动获取以下数据：
-   - 概念板块资金流向
-   - 行业板块资金流向
-   - 涨停池数据
-   - 北向资金流向
-   - 龙虎榜数据
-
-2. **特征工程** - 构建多维度因子：
-   - 资金流因子（流入/流出、蓄力信号）
-   - 涨停动量因子（惯性、连板）
-   - 量价背离因子（吸筹信号）
-   - 趋势动量因子（波动率）
-
-3. **模型预测** - LightGBM排序学习：
-   - 滚动训练机制（每月更新）
-   - 综合评分排名
-   - 特征重要性分析
-
-4. **报告生成** - 多格式输出：
-   - Markdown报告
-   - HTML可视化报告
-   - 文本摘要（用于推送）
-
-### 定时任务
-
-| 时间 | 任务 |
-|------|------|
-| 08:00 | 执行当日涨停预测 |
-| 15:05 | 获取收盘数据 + 自动验证预测 |
-| 15:30 | 模型更新检查 |
-
-## 📊 回测系统
-
-系统内置回测数据库，自动记录每日预测并评估准确性。
-
-### 回测功能
-
-| 命令 | 说明 |
-|------|------|
-| `python main.py --mode backtest` | 查看回测绩效统计 |
-| `python main.py --mode report` | 生成回测报告 |
-| `python backtest_tool.py` | 交互式回测工具 |
-| `python backtest_tool.py summary` | 绩效汇总 |
-| `python backtest_tool.py history --days 7` | 查看预测历史 |
-| `python backtest_tool.py analyze` | 板块命中分析 |
-| `python backtest_tool.py export` | 导出报告 |
-
-### 回测指标
-
-- **命中率**: 预测板块次日涨幅>3%或出现涨停的比例
-- **超额收益**: 预测板块平均收益 vs 全市场平均收益
-- **分排名统计**: Top-1/Top-3/Top-5命中率
-- **涨停捕获数**: 成功预测到涨停的累计数量
-
-### 数据流程
-
+**输出示例：**
 ```
-每日早8点 → 发出预测 → 记录到回测数据库
-                          ↓
-每日15:05 → 获取实际数据 → 自动验证昨日预测
-                          ↓
-               更新命中率、收益等指标
+============================================================
+📊 【ETF涨幅预测】2026年01月06日
+
+🎯 今日预测ETF:
+1. 5GETF(515050) (得分:0.69)
+   └─ 放量突破; 突破高位
+2. 环保ETF(512580) (得分:0.61)
+   └─ 缩量蓄势
+3. 光伏ETF(515790) (得分:0.57)
+   └─ 综合因子评分较高
+...
+============================================================
 ```
 
-## 🔧 配置说明
+### 3️⃣ 模型训练 (`train` / `etf-train`)
 
-编辑 `config/settings.py` 自定义配置：
+```bash
+# 板块模型训练
+python main.py --mode train
+
+# ETF深度神经网络训练
+python main.py --mode etf-train
+
+# 强制重新训练
+python main.py --mode etf-train --force-train
+```
+
+**训练日志示例：**
+```
+使用计算设备: cuda
+ETF训练集: 1092 样本, 验证集: 273 样本
+特征数: 19
+Epoch [10/100], Train Loss: 0.0851, Valid Loss: 0.1146
+Epoch [20/100], Train Loss: 0.0791, Valid Loss: 0.1134
+Early stopping at epoch 44
+ETF模型训练完成: MSE=0.1134, NDCG@5=0.7054
+```
+
+### 4️⃣ 数据获取 (`fetch` / `etf-fetch`)
+
+```bash
+# 获取板块每日数据
+python main.py --mode fetch
+
+# 获取ETF历史数据（指定天数）
+python main.py --mode etf-fetch --days 90
+```
+
+### 5️⃣ 完整流程 (`full` / `etf-full`)
+
+一键执行：获取数据 → 训练模型 → 生成预测
+
+```bash
+# 板块完整流程
+python main.py --mode full
+
+# ETF完整流程
+python main.py --mode etf-full --days 60
+```
+
+### 6️⃣ 回测系统 (`backtest` / `etf-backtest`)
+
+```bash
+# 查看板块回测统计
+python main.py --mode backtest --days 30
+
+# 查看ETF回测统计
+python main.py --mode etf-backtest --days 30
+
+# 运行3年ETF滚动回测
+python main.py --mode etf-backtest-run --years 3 --train-months 24
+```
+
+**回测统计示例（2025年奖惩模式，本金 ¥10,000）：**
+```
+============================================================
+📊 ETF奖惩模式回测绩效统计
+============================================================
+📅 统计周期: 2025-01-01 ~ 2025-12-31
+📈 总交易天数: 243
+💰 初始本金: ¥10,000
+💎 Top-1最终资金: ¥16,543 (年化 +65.43%)
+💎 Top-5最终资金: ¥12,586 (年化 +25.86%)
+🎯 Top-1命中率: 53.91%
+🎯 整体命中率: 52.35%
+📊 平均日收益: +0.101%
+🏆 胜率: 55.14%
+📉 最大回撤: -11.97%
+📊 夏普比率 (Top-1): 2.62
+📊 夏普比率 (Top-5): 1.43
+============================================================
+```
+
+### 7️⃣ 守护进程模式 (`daemon`)
+
+自动定时执行预测任务，适合服务器部署。
+
+```bash
+python main.py --mode daemon
+```
+
+**定时任务：**
+- **08:00** - 早盘涨停预测
+- **15:05** - 收盘数据更新
+- **15:30** - 模型更新检查
+
+### 8️⃣ 生成报告 (`report` / `etf-report`)
+
+```bash
+# 生成板块回测报告
+python main.py --mode report
+
+# 生成ETF回测报告
+python main.py --mode etf-report --days 30
+```
+
+---
+
+## 🧠 模型说明
+
+### ETF深度神经网络模型
+
+```
+输入层 (19维特征)
+    │
+    ▼
+全连接层 (64神经元) + ReLU + Dropout(0.2)
+    │
+    ▼
+全连接层 (32神经元) + ReLU + Dropout(0.2)
+    │
+    ▼
+输出层 (1维预测得分)
+```
+
+**特征列表（19维）：**
+
+| 类别 | 特征名 | 说明 |
+|------|--------|------|
+| 动量特征 | `return_3d`, `return_5d`, `return_10d`, `return_20d` | N日涨跌幅 |
+| 波动率 | `volatility_3d`, `volatility_5d`, `volatility_10d`, `volatility_20d` | N日波动率 |
+| 成交量 | `volume_ratio`, `turnover_ratio` | 量比、换手率比 |
+| 价格位置 | `price_position` | 20日价格位置 |
+| 均线偏离 | `ma5_bias`, `ma10_bias`, `ma20_bias` | 均线乖离率 |
+| 资金流 | `money_flow_ma3`, `money_flow_ma5`, `money_flow_momentum` | 资金流均值与动量 |
+| 技术指标 | `rsi_14`, `atr_14` | RSI、ATR |
+
+**训练配置：**
+- 优化器: Adam (lr=0.001)
+- 损失函数: MSE Loss
+- 早停: patience=10
+- 批大小: 32
+- 最大轮数: 100
+
+---
+
+## 📁 项目结构
+
+```
+forecast-block/
+├── main.py                 # 主入口
+├── requirements.txt        # Python依赖
+├── environment.yml         # Conda环境
+├── config/
+│   └── settings.py         # 配置文件
+├── data/
+│   ├── data_fetcher.py     # 板块数据获取
+│   ├── data_processor.py   # 板块数据处理
+│   ├── etf_data_fetcher.py # ETF数据获取
+│   └── etf_data_processor.py # ETF数据处理与特征工程
+├── models/
+│   ├── predictor.py        # 板块预测模型 (LightGBM)
+│   ├── etf_predictor.py    # ETF预测模型 (DNN/PyTorch)
+│   └── saved/              # 模型保存目录
+│       ├── etf_predict_model.pth    # PyTorch模型权重
+│       ├── etf_scaler.pkl           # 特征标准化器
+│       └── etf_feature_importance.csv # 特征重要性
+├── backtest/
+│   ├── database.py         # 板块回测数据库
+│   ├── etf_database.py     # ETF回测数据库
+│   ├── backtest_engine.py  # 板块回测引擎
+│   └── etf_backtest_engine.py # ETF回测引擎
+├── utils/
+│   └── report_generator.py # 报告生成器
+├── scheduler/
+│   └── task_scheduler.py   # 定时任务调度
+├── web/                    # Web界面（可选）
+│   ├── templates/
+│   └── static/
+├── reports/                # 预测报告输出
+├── logs/                   # 运行日志
+└── data/
+    ├── historical/         # 历史数据缓存
+    ├── backtest_results/   # 回测结果
+    └── raw/                # 原始数据
+```
+
+---
+
+## ⚙️ 配置说明
+
+编辑 `config/settings.py` 进行配置：
 
 ```python
-# 预测时间
+# 数据配置
 DATA_CONFIG = {
-    "predict_time": "08:00",  # 早盘预测时间
-    "fetch_time": "15:05",    # 数据获取时间
+    "history_days": 60,          # 加载历史天数
+    "train_window_months": 6,    # 训练窗口（月）
+    "predict_time": "08:00",     # 预测时间
+    "fetch_time": "15:05",       # 数据获取时间
 }
 
 # 模型配置
 MODEL_CONFIG = {
-    "top_k": 5,  # 输出Top-K板块
-    "rolling_step_days": 30,  # 滚动训练步长
+    "learning_rate": 0.001,
+    "epochs": 100,
+    "batch_size": 32,
+    "hidden_dim1": 64,
+    "hidden_dim2": 32,
+    "dropout_rate": 0.2,
 }
 
-# 通知配置（可选）
-NOTIFICATION_CONFIG = {
-    "enable_dingtalk": True,
-    "dingtalk_webhook": "https://...",
-}
+# ETF列表
+ETF_LIST = [
+    ("515050", "5GETF"),
+    ("512760", "芯片ETF"),
+    ("515790", "光伏ETF"),
+    # ... 更多ETF
+]
 ```
 
-## 📊 预测输出示例
+---
 
+## 📚 理论基础
+
+**本系统包含两种预测模式，详细理论请参考 [THEORY.md](THEORY.md) 文档：**
+
+### 📖 THEORY.md 完整目录
+
+1. **理论基础** - 为什么预测涨停潮、资金流向的意义
+2. **市场微观结构** - 涨停潮三阶段、量价背离、龙虎榜分析
+3. **数据工程架构** - 数据源选择、特征提取、数据库设计
+4. **特征工程体系** - 一阶特征、二阶特征、高级特征详解
+5. **模型选择与优化** - 为什么选LightGBM、训练策略、评估指标
+6. **🆕 两种预测模式对比** ⭐
+   - **模式一：标准监督学习 (DNN)** - 追求预测精度，稳健收益
+   - **模式二：奖惩强化学习 (Reward DNN)** - 追求实盘收益，高风险高收益
+   - 完整对比实验数据（2024年回测）
+   - 模式选择建议
+7. **风险管理框架** - 高位接盘风险、市场风格变化、数据质量
+8. **性能评估指标** - NDCG、Hit Rate、Excess Return、月度跟踪
+9. **核心创新点** - 量价背离、双模式框架、滚动训练、多源融合
+
+### 🎯 快速了解系统
+
+**为什么预测"涨停潮"？**
+
+A股涨停板制度（±10%）创造了独特的价格发现机制：
+
+- **涨停 = 流动性黑洞**：市场上没有足够的卖家
+- **涨停潮 = 市场共识极强**：板块内多只股票同日涨停
+- **预测涨停比预测涨幅更实用**：离散事件，信号清晰
+
+### 💡 两种预测模式选择指南
+
+| 维度 | 标准模式（DNN） | 奖惩模式（Reward DNN） |
+|------|----------------|----------------------|
+| **年化收益** | +117% | +152% ✓ |
+| **夏普比率** | 1.35 | 1.58 ✓ |
+| **最大回撤** | -8.9% ✓ | -11.2% |
+| **适用场景** | 震荡市、稳健投资 | 趋势市、进取投资 |
+| **风险水平** | 低 | 中等 |
+
+> 📖 **查看详细对比 → [THEORY.md - 第6章](THEORY.md#两种预测模式对比)**
+
+### 资金流向的意义
+
+````
+
+$$\text{Net Flow} = \sum_{\text{buy large order}} \text{Volume} - \sum_{\text{sell large order}} \text{Volume}$$
+
+- **大单**（>50万）代表机构/游资行为
+- **板块级资金流**比个股更可靠（噪声抵消）
+- **持续净流入 = 聪明资金吸筹**
+
+### 深度学习的优势
+
+相比传统模型，DNN能够：
+1. 自动学习特征交互
+2. 捕捉非线性关系
+3. 更高的预测准确性
+
+| 模型 | 可解释性 | 预测准确性 |
+|------|----------|------------|
+| 线性回归 | ⭐⭐⭐⭐⭐ | ⭐⭐ |
+| 决策树 | ⭐⭐⭐⭐ | ⭐⭐⭐ |
+| 随机森林 | ⭐⭐⭐ | ⭐⭐⭐⭐ |
+| **深度神经网络** | ⭐⭐ | ⭐⭐⭐⭐⭐ |
+
+---
+
+## ❓ 常见问题
+
+### Q: 提示 `No module named 'torch'`
+```bash
+pip install torch>=2.0.0
+# 或安装CUDA版本
+pip install torch --index-url https://download.pytorch.org/whl/cu118
 ```
-📈 【A股板块涨停预测】2026年01月03日
 
-🎯 今日预测涨停板块:
-1. 固态电池 (得分:0.92)
-   └─ 资金连续3日流入，量价背离
-2. 人形机器人 (得分:0.88)
-   └─ 昨日涨停家数激增，动量效应
-3. 低空经济 (得分:0.85)
-   └─ 北向资金增持，资金蓄力
-4. 算力概念 (得分:0.82)
-   └─ 主力资金净流入居前
-5. 合成生物 (得分:0.79)
-   └─ 近期涨停惯性较强
+### Q: 如何使用GPU训练？
+系统会自动检测CUDA，日志显示 `使用计算设备: cuda` 即为GPU模式。
 
-⚠️ 仅供参考，不构成投资建议
-```
+### Q: 数据获取失败？
+- 检查网络连接
+- AKShare 可能有请求频率限制，稍后重试
+- 确保 `akshare>=1.12.0`
 
-## 🛡️ 风控机制
+### Q: 模型预测效果不好？
+- 确保有足够历史数据（建议60天以上）
+- 尝试调整训练窗口 `--train-months`
+- 使用 `--force-train` 重新训练
 
-- **高位避险**: 过去20日涨幅>30%且今日大跌的板块自动过滤
-- **资金背离检测**: 识别主力出货信号
-- **模型回测验证**: NDCG@5指标监控
+### Q: 如何查看特征重要性？
+查看 `models/saved/etf_feature_importance.csv`
 
-## 📝 注意事项
+---
 
-1. **数据延迟**: 资金流向数据为收盘后更新，早盘预测使用前一日数据
-2. **首次运行**: 需先积累至少5天数据才能进行有效预测
-3. **模型冷启动**: 建议先运行 `--mode full` 完成初始化
-4. **非交易日**: 系统自动跳过周末预测
-
-## ⚠️ 风险提示
-
-- 本系统仅供学习研究使用
-- 预测结果不构成投资建议
-- 股市有风险，入市需谨慎
-- 历史表现不代表未来收益
-
-## 📚 技术参考
-
-- [AkShare](https://akshare.akfamily.xyz/) - 金融数据接口
-- [LightGBM](https://lightgbm.readthedocs.io/) - 梯度提升框架
-- [Microsoft Qlib](https://github.com/microsoft/qlib) - 量化投资平台
-
-## 📄 License
+## 📄 许可证
 
 MIT License
+
+---
+
+## ⚠️ 免责声明
+
+**本系统仅供学习研究使用，不构成任何投资建议。**
+
+- 股市有风险，投资需谨慎
+- 历史表现不代表未来收益
+- 请根据自身情况独立决策
+
+---
+
+## 🤝 贡献
+
+欢迎提交 Issue 和 Pull Request！
+
+---
+
+*Made with ❤️ by forecast-block team*
